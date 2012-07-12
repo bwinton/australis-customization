@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Customization Mode</title>
+    <link href="styles/general.css" type="text/css" rel="stylesheet" />
+    <link href="styles/toolbar.css" type="text/css" rel="stylesheet" />
+    <link href="styles/panel.css" type="text/css" rel="stylesheet" />
+    <script data-main="js/app" src="js/lib/require.js"></script>
+  </head>
+  
+  <body spellcheck="false">
+
+    <div class="outerContainer">
+      <!-- Window [Start] -->
+      <div class="window">
+    
+        <div class="arrowPanelContainer" id="menuPanel">
+          <div class="arrowPanelArrowTop"></div>
+          <div id="arrowPanel">
+        
+            <div id="panelContext">
+              <div>Add to Toolbar</div>
+              <div>Remove from Menu</div>
+              <hr>
+              <div>Customize</div>
+            </div>
+
+            <div class="panelToolbarIcons">
+            
+              <div class="panelToolbarIconsRow">
+                <panel-button type="newWindow">New Window</panel-button>
+                <panel-button type="privateBrowsing">Guest Mode</panel-button>
+                <panel-button type="savePage">Save Page</panel-button>
+              </div>
+
+              <div class="panelToolbarIconsRow">
+                <panel-button type="print">Print</panel-button>
+                <panel-button type="history">History</panel-button>
+                <panel-button type="fullScreen">Full Screen</panel-button>
+              </div>
+              
+              <div class="panelToolbarIconsRow">
+                <panel-button type="find">Find</panel-button>
+                <panel-button type="options">Preferences</panel-button>
+                <panel-button type="addons">Add-ons</panel-button>
+              </div>
+
+            </div>
+            <div class="panelSectionEdit">
+              <div class="panelSectionEditContainer">
+              
+                <div class="panelSectionEditContainerButton">
+                  <div class="panelSectionEditContainerIcon"><img src="images/editIcon-cut.png" alt="editIcon-cut" width="16" height="16" /></div>
+                  <div class="panelSectionEditContainerLabel">Cut</div>
+                </div>
+                <div class="panelSectionEditContainerButton">
+                  <div class="panelSectionEditContainerIcon"><img src="images/editIcon-copy.png" alt="editIcon-cut" width="16" height="16" /></div>
+                  <div class="panelSectionEditContainerLabel">Copy</div>
+                </div>
+                <div class="panelSectionEditContainerButton">
+                  <div class="panelSectionEditContainerIcon"><img src="images/editIcon-paste.png" alt="editIcon-cut" width="16" height="16" /></div>
+                  <div class="panelSectionEditContainerLabel">Paste</div>
+                </div>
+
+              </div>
+              <div class="panelSectionEditContainer">
+              
+                <div class="panelSectionEditContainerButton">
+                  <div class="panelSectionEditContainerLabel">+</div>
+                </div>
+                <div class="panelSectionEditContainerButton">
+                  <div class="panelSectionEditContainerLabel">100%</div>
+                </div>
+                <div class="panelSectionEditContainerButton">
+                  <div class="panelSectionEditContainerLabel">-</div>
+                </div>
+
+              </div>
+            </div>
+            <div class="panelFooter">
+              <img id="help" src="images/button-help.png">
+              <div id="customize">Customize</div>
+            </div>
+          
+          </div>
+          
+        </div>
+        <!-- OuterContainer [Start] -->
+        <div class="windowOuterContainer">
+
+          <!-- NavBar [Start] -->
+          <div class="navBar">
+            <div class="toolbarButton backButton"><img src="images/toolbarButton-back.png"></div>
+            <div class="locationBar" contentEditable="true"><div class="locationBarLabel"><span class="domainName">www.stephenhorlander.com</span><span class="urlPath">/</span></div>
+              <div class="stopGoReload"><div class="icon"></div></div>
+            </div>
+            <div class="splitToolbarButton bookmarksButton">
+              <div class="toolbarButton bookmarkStar"><div class="icon"></div></div>
+              <div class="splitToolbarButtonSeparator"></div>
+              <div class="toolbarButton dropDown"><img src="images/toolbarButton-dropDown.png"></div>
+            </div>
+            <div class="toolbarButton downloadButton"><img src="images/toolbarButton-download.png"></div>
+            <div class="toolbarButtonSeparator"></div>
+            <div class="toolbarButton menuButton"><img src="images/toolbarButton-menu.png"></div>
+          </div>
+          
+          <!-- NavBar [End] -->
+  
+          <div class="contentArea">
+            <div class="customizeContentContainer" style="display:none">
+              <div class="customizeThemesArea">
+                <div class="customizeCategoryHeader">Themes</div>
+                <toolbar-item type="share">Share</toolbar-item>
+                <toolbar-item type="share">Share</toolbar-item>
+                <toolbar-item type="share">Share</toolbar-item>
+              <div class="customizeSegmentSeparator"></div>
+              <div class="customizeToolsArea">
+                <div class="customizeCategoryHeader">More Tools</div>
+                <toolbar-item type="share">Share</toolbar-item>
+                <toolbar-item type="share">Share</toolbar-item>
+                <toolbar-item type="share">Share</toolbar-item>
+              </div>
+              <div class="customizeSegmentSeparator"></div>
+              <div class="customizeMenuArea">
+                <div class="customizeCategoryHeader">Menu</div>
+                <!-- Menu goes here. -->
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <!-- OuterContainer [End] -->
+
+      </div>
+      <!-- Window [End] -->
+    </div>
+    <div class="imagePreloader"></div>
+  
+  </body>
+</html>
+

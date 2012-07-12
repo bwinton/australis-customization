@@ -1,0 +1,58 @@
+/* General */
+
+* {
+  margin: 0;
+  padding: 0;
+/*   font-size: 0; */
+}
+
+html {
+  height: 100%;
+  overflow-y: hidden !important;
+}
+
+body {
+  height: 100%;
+  background-image: url(images-win7/backgroundWallpaper.jpg);
+  background-size: cover;
+  background-attachment: fixed;
+/*
+  background-color: #1a2633;
+  background-image: url(images-general/texture.png);
+  background-attachment: fixed;
+*/
+}
+
+.outerContainer {
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  height: 100%;
+  width: 100%;
+}
+
+.spacerTop {
+  -moz-box-flex: 1;
+/*   height: 30px; */
+/*   background-color: hsla(100,50%,50%,.1);  */
+}
+
+.middle {
+  display: -moz-box;
+  -moz-box-flex: 1;
+  -moz-box-pack: center;
+  height: 100%;
+}
+
+.spacerBottom {
+  -moz-box-flex: 1;
+/*   height: 40px; */
+/*   background-color: hsla(100,50%,50%,.1);  */
+}
+
+.clearFix:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}

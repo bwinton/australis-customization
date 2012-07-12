@@ -1,0 +1,1309 @@
+/* ---Image Preloading--- */
+.imagePreloader {
+  width: 1px;
+  height: 1px;
+  background-image: url(images-win7/toolbarButton-bookmarkStarred.png),
+                    url(images-win7/tabBackgroundStart.png),
+                    url(images-win7/tabBackgroundMiddle.png),
+                    url(images-win7/tabBackgroundEnd.png),
+                    url(images-win7/windowBackgroundCustomizeMode.jpg);
+}
+
+/* ---UI Styles--- */
+
+/* Window */
+
+.window {
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-flex: 1;
+  /*max-width: 1000px;
+  min-width: 724px;*/
+  position: relative;
+  margin: 0px;
+/*   background-image: url(images-win7/windowBackground.jpg); */
+/*  background-image: url(images-win7/windowBackgroundAlt.jpg);
+  background-size: cover; */
+  border: none;
+/*  border-radius: 6px; */
+/*  box-shadow: 0 0 0 1px rgba(0,0,0,.75),
+              0 1px 10px 0 rgba(0,0,0,.95),
+              0 0 0 1px rgba(255,255,255,.5) inset; */
+  color: hsl(0,0%,10%);
+  font-family: Segoe UI, Verdana, sans-serif;
+  font-size: 0;
+  line-height: 0;
+}
+.window.customizeMode {
+  background-image: url(images-win7/windowBackgroundCustomizeMode.jpg);
+}
+
+
+/* Titlebar and Widgets */
+.titleBar {
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  width: 100%;
+  height: 19px;
+  overflow: hidden;
+  -moz-user-select:none;
+  cursor: default;
+}
+
+.titleBarSpacer {
+  -moz-box-flex: 1;
+  min-width: 10px !important;
+}
+
+.windowControls {
+  position: relative;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  margin: 0 -1px;
+  border-bottom-left-radius: 3.5px;
+  box-shadow: 0 0 0 1px hsla(0,0%,100%,.25);
+  z-index: 99999;
+}
+
+.widget {
+  -moz-box-flex: 1;
+  width: 26px;
+  background-image: -moz-linear-gradient(hsla(210,30%,85%,.65), hsla(209,13%,54%,.65));
+  background-repeat: no-repeat;
+  background-position: center 2px, top left;
+  background-clip: border-box;
+  background-origin: border-box;
+  box-shadow: 0 1px 0 rgba(255,255,255,.35) inset,
+              0 0 0 1px rgba(255,255,255,.35) inset;
+  border: 1px solid hsla(211,34%,23%,.75);
+  border-top: none;
+  border-right: none;
+  -moz-transition-property: background-color, box-shadow;
+  -moz-transition-duration: 100ms;
+  -moz-transition-timing-function: ease;
+}
+
+.widget:hover {
+  background-color: hsla(0,0%,100%,.65);
+}
+.widget:hover:active {
+  background-color: hsla(205,11%,45%,.65);
+  box-shadow: 0 1px 1px hsla(0,0%,0%,.5) inset;
+}
+
+.widget:first-child {
+  border-bottom-left-radius: 3px;
+}
+
+.widget:last-child {
+  border-right: 1px solid hsla(211,34%,23%,.75);
+  border-radius: 0 6px 0 0;
+}
+
+.widget.widgetMinimize {
+  background-image: url(images-win7/windowCloseMinimize.png),
+                    -moz-linear-gradient(hsla(210,30%,85%,.65), hsla(209,13%,54%,.65));
+}
+.widget.widgetMaximize {
+  background-image: url(images-win7/windowCloseMaximize.png),
+                    -moz-linear-gradient(hsla(210,30%,85%,.65), hsla(209,13%,54%,.65));
+}
+.widget.widgetClose {
+  width: 46px;
+  background-color: #b23636;
+  background-image: url(images-win7/windowCloseIcon.png),
+                    -moz-radial-gradient(hsla(0,100%,87%,.35), hsla(0,100%,75%,0)),
+                    -moz-linear-gradient(top, hsla(0,100%,80%,.65), hsla(0,100%,80%,0));
+  background-repeat: no-repeat;
+  background-position: 15px 2px, center center, top left;
+  box-shadow: 0 1px 0 hsla(9,100%,90%,.25) inset,
+              0 0 0 1px hsla(9,100%,90%,.35) inset;
+  border-color: #4c0f0f;
+}
+.widget.widgetClose:hover {
+  background-color: #e52e2e;
+}
+.widget.widgetClose:hover:active {
+  background-color: #8c0e0e;
+}
+
+
+/* OuterContainer */
+.windowOuterContainer {
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-flex: 1;
+  position: relative;
+  height: 100%;
+  z-index: 199;
+  margin: 0px;
+  -moz-transition-duration: 150ms;
+}
+.windowOuterContainer.customizeMode {
+  padding: 20px !important;
+}
+
+/* Tabs */
+
+.tabStripBackgroundContainer {
+  position: absolute;
+  -moz-box-flex: 1;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  border-radius: 5px;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.tabStripBackground {
+  position: absolute;
+  -moz-box-flex: 1;
+  top: 35px;
+  left: 40px;
+  width: -moz-calc(100% - 80px);
+  height: 0px;
+  background-color: #aebdcc;
+  box-shadow: 0 0 30px 25px #aebdcc;
+  opacity: .85;
+  z-index: 1;
+  -moz-transition-duration: 150ms;
+}
+.tabStripBackground.customizeMode {
+  top: 55px;
+  left: 60px;
+  width: -moz-calc(100% - 100px);
+  opacity: 0;
+}
+
+
+.tabBar {
+  display: -moz-box;
+  width: 100%;
+  -moz-box-orient: horizontal;
+  position: relative;
+  margin: -4px 0 0;
+  height: 31px;
+  overflow: hidden;
+}
+
+.tab {
+  padding: 8px 25px 7px;
+  margin-left: -16px;
+  min-width: 210px;
+  max-width: 210px;
+  -moz-user-select:none;
+  cursor: default;
+  -moz-transition-duration: 150ms;
+}
+
+.tab:first-child {
+  margin-left: 0;
+}
+
+.tab:hover {
+  background-image: url(images-win7/tabBackgroundStart.png),
+                    url(images-win7/tabBackgroundMiddle.png),
+                    url(images-win7/tabBackgroundEnd.png);
+  background-repeat: no-repeat,
+                     no-repeat,
+                     no-repeat;
+  background-position: left,
+                       30px,
+                       right;
+  background-size: 30px 31px,
+                   -moz-calc(100% - 60px) 31px,
+                   30px 31px;
+}
+
+.tab.appTab {
+  -moz-box-flex: 0;
+  width: 66px;
+  min-width: 66px;
+}
+
+.tab.appTab:hover {
+  background-repeat: no-repeat,
+                     no-repeat,
+                     no-repeat;
+  background-position: left,
+                       30px,
+                       right;
+  background-size: 30px 31px,
+                   -moz-calc(100% - 60px) 31px,
+                   30px 31px;
+}
+
+
+.tab > .favicon {
+  float: left;
+  margin-right: 6px;
+  width: 16px;
+  height: 16px;
+  background-image: url(images-win7/defaultFavicon.png);
+  filter: url(effects.svg#desaturateImage);
+  opacity: .9;
+}
+.tab.appTab > .favicon {
+  margin-right: 0;
+}
+
+.tab:hover > .favicon,
+.tab.active  > .favicon {
+  filter: url(effects.svg#colorImage);
+  opacity: 1;
+}
+
+.tab.thePlanetarium > .favicon,
+.tab.customizeTab > .favicon,
+.tab.blankTab > .favicon {
+  margin-right: 2px;
+  width: 0;
+  height: 16px;
+  background-image: none;
+}
+
+.tab > .label {
+  float: left;
+  width: 100%;
+  width: -moz-calc(100% - 38px);
+  height: 16px;
+  color: #030e1a;
+  font-size: 12px;
+  line-height: 14px;
+  overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+  opacity: .9;
+}
+.tab:hover > .label,
+.tab.active  > .label {
+  opacity: 1;
+}
+.tab.active  > .label {
+  width: -moz-calc(100% - 38px);
+}
+.tab.thePlanetarium > .label,
+.tab.blankTab > .label {
+  width: -moz-calc(100% - 18px);
+}
+
+.tab .close {
+  float: left;
+  width: 16px;
+  height: 16px;
+  background-image: -moz-image-rect(url(images-win7/closeTab.png), 0, 16, 16, 0);
+}
+.tab:hover .close,
+.tab.active .close {
+  opacity: 1;
+  -moz-transition: linear 150ms;
+}
+
+.tab .close:hover {
+  background-image: -moz-image-rect(url(images-win7/closeTab.png), 0, 32, 16, 16);
+}
+.tab .close:hover:active {
+  background-image: -moz-image-rect(url(images-win7/closeTab.png), 0, 48, 16, 32);
+}
+
+.tab.active {
+  position: relative;
+  background-image: url(images-win7/tabActiveStart.png),
+                    url(images-win7/tabActiveMiddle.png),
+                    url(images-win7/tabActiveEnd.png);
+  background-repeat: no-repeat,
+                     no-repeat,
+                     no-repeat;
+  background-position: left,
+                       30px,
+                       right;
+  background-size: 30px 31px,
+                   -moz-calc(100% - 60px) 31px,
+                   30px 31px;
+  z-index: 399;
+}
+.tab.active.appTab {
+}
+
+
+.tab.home > .favicon {
+  float: left;
+  margin-right: 0;
+  width: 16px;
+  height: 16px;
+  background-image: url(images-win7/defaultFavicon.png);
+}
+
+
+.tabSeparator {
+  width: 3px;
+  height: 30px;
+  background-image: url(images-win7/tabSeparator.png);
+  background-repeat: no-repeat;
+  margin-left: -16px;
+}
+.tabSeparatorHidden {
+  width: 3px;
+  height: 30px;
+  margin-left: -16px;
+  background-image: none;
+}
+
+.tab.home .favicon {
+  background-image: url(images-win7/favicon-homeTab.png);
+}
+
+.tab.twitter .favicon {
+  background-image: url(images-win7/favicon-twitter.png);
+}
+
+.tab.rdio .favicon {
+  background-image: url(images-win7/favicon-rdio.png);
+}
+
+.tab.googlePlus .favicon {
+  background-image: url(images-win7/favicon-googlePlus.png);
+}
+
+.tab.pandora .favicon {
+  background-image: url(images-win7/favicon-pandora.png);
+}
+
+.tab.dribble .favicon {
+  background-image: url(images-win7/favicon-dribble.png);
+}
+
+.tab.chromaticPixel .favicon {
+  background-image: url(images-win7/favicon-chromaticPixel.png);
+}
+
+.tab.tbpl .favicon {
+  background-image: url(images-win7/favicon-tbpl.png);
+}
+
+.tab.mdn .favicon {
+  background-image: url(images-win7/favicon-mdn.png);
+}
+
+.tab.arsTechnica .favicon {
+  background-image: url(images-win7/favicon-arsTechnica.png);
+}
+
+.tab.firefoxStart .favicon {
+  background-image: url(images-win7/favicon-firefox.png);
+}
+
+.tab.newTab {
+  -moz-box-flex: 0;
+  width: 66px;
+  min-width: 66px;
+}
+.tab.newTab .favicon {
+  width: 16px;
+  height: 16px;
+  background-image: url(images-win7/newTab-Icon.png);
+}
+
+
+/* InnerContainer */
+.innerContainer {
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-flex: 1;
+  position: relative;
+  z-index: 299;
+  margin-top: -1px;
+  width: 100%;
+  height: 100%;
+  border-radius: 2.5px;
+  box-shadow: 0 0 0 1px hsla(0,0%,0%,.3),
+              0 0 2px hsla(0,0%,0%,.1);
+  -moz-user-select:none;
+  cursor: default;
+}
+
+
+/* NavBar and Toolbar Items */
+.navBar {
+  position: relative;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  width: 100%;
+  height: 40px;
+  background-image: -moz-linear-gradient(#ecf3fa, #dcebfa);
+  border-radius: 2.5px 2.5px 0 0;
+  border-bottom: 1px solid hsl(210,22%,78%);
+  box-shadow: inset 0 1px 0 hsla(0,0%,100%,.8);
+  z-index: 599;
+}
+
+.navBarSpacer,
+.toolbarSpacer {
+  -moz-box-flex: 1;
+}
+
+.toolbarButton,
+.menuToolbarButton {
+  -moz-box-flex: 0;
+  min-width: 16px;
+  padding: 3px 7px;
+  margin: 8px 2px 8px 0;
+  border: 1px solid transparent;
+  border-radius: 2px;
+  -moz-user-select:none;
+  cursor: default;
+  -moz-transition-property: background-color, border-color, box-shadow;
+  -moz-transition-duration: 150ms;
+  -moz-transition-timing-function: ease;
+}
+.toolbarButton:last-child,
+.menuToolbarButton:last-child {
+  margin-right: 4px;
+}
+
+.splitToolbarButton {
+  margin: 8px 2px 8px 0;
+  display: -moz-box;
+}
+.splitToolbarButton > .toolbarButton {
+  position: relative;
+  margin: 0 -1px;
+  padding: 3px 6px;
+  border-radius: 0;
+}
+.splitToolbarButton:hover > .toolbarButton  {
+  background-color: hsla(206,30%,95%,.1);
+  background-image: -moz-linear-gradient(hsla(0,0%,100%,.6), hsla(0,0%,100%,.1));
+  background-clip: padding-box;
+  border: 1px solid hsla(210,54%,20%,.2);
+  border-color: hsla(210,54%,20%,.15) hsla(210,54%,20%,.2) hsla(210,54%,20%,.25);
+  box-shadow: 0 1px 0 hsla(0,0%,100%,.3) inset,
+              0 0 0 1px hsla(0,0%,100%,.2) inset,
+              0 1px 0 hsla(210,54%,20%,.03);
+  -moz-transition-property: background-color, border-color, box-shadow;
+  -moz-transition-duration: 150ms;
+  -moz-transition-timing-function: ease;
+}
+.splitToolbarButton > .toolbarButton:hover {
+  background-color: hsla(210,48%,96%,.75);
+  box-shadow: 0 1px 0 hsla(0,0%,100%,.3) inset,
+              0 0 0 1px hsla(0,0%,100%,.3) inset,
+              0 1px 0 hsla(210,54%,20%,.03),
+              0 0 2px hsla(210,54%,20%,.1);
+}
+.splitToolbarButton > .toolbarButton:first-child  {
+  position: relative;
+  margin: 0;
+  margin-right: -1px;
+  border-top-left-radius: 2px;
+  border-bottom-left-radius: 2px;
+  border-right-color: transparent;
+}
+.splitToolbarButton > .toolbarButton:last-child  {
+  position: relative;
+  margin: 0;
+  margin-left: -1px;
+  border-top-right-radius: 2px;
+  border-bottom-right-radius: 2px;
+  border-left-color: transparent;
+}
+
+.splitToolbarButton > .toolbarButton.dropDown  {
+  padding: 3px 4px;
+}
+.splitToolbarButton > .toolbarButton.dropDown::after  {
+  display: inline-block;
+  content: url(images-win7/toolbarButton-dropDown.png);
+}
+.splitToolbarButtonSeparator {
+  margin: 4px 0;
+  width: 1px;
+  background-color: hsla(210,54%,20%,.2);
+  z-index: 99;
+  box-shadow: 0 0 0 1px hsla(0,0%,100%,.2);
+}
+.splitToolbarButton:hover > .splitToolbarButtonSeparator {
+  margin: 1px 0;
+  -moz-transition-property: margin;
+  -moz-transition-duration: 10ms;
+  -moz-transition-timing-function: ease;
+}
+.splitToolbarButton > .toolbarButton:hover  {
+  border-color: hsla(210,54%,20%,.3) hsla(210,54%,20%,.35) hsla(210,54%,20%,.4);
+  z-index: 199;
+}
+
+.menuToolbarButton:last-child {
+  -moz-margin-end: 8px;
+}
+
+.menuToolbarButton {
+  min-width: 28px;
+}
+.menuToolbarButton::after {
+  display: inline-block;
+  content: url(images-win7/toolbarButton-dropDown.png);
+  -moz-margin-start: 4px;
+}
+
+.toolbarButton.backButton {
+  position: relative;
+  z-index: 99;
+  padding: 6px;
+  margin: 4px 8px 4px 4px;
+  background-color: #dce7ef;
+  background-image: -moz-linear-gradient(hsla(0,0%,100%,.8), hsla(0,0%,100%,.2));
+  background-clip: padding-box;
+  border: 1px solid hsla(210,54%,20%,.2);
+  border-color: hsla(210,54%,20%,.2) hsla(210,54%,20%,.3) hsla(210,54%,20%,.35);
+  border-radius: 100%;
+  box-shadow: 0 1px 0 hsla(0,0%,100%,.3) inset,
+              0 0 0 1px hsla(0,0%,100%,.3) inset,
+              0 1px 0 hsla(210,54%,20%,.03);
+  -moz-user-select:none;
+  cursor: default;
+  -moz-transition-property: background-color, border-color, box-shadow;
+  -moz-transition-duration: 150ms;
+  -moz-transition-timing-function: ease;
+}
+.toolbarButton.backButton:hover {
+  background-color: #dce7ef;
+  background-image: -moz-linear-gradient(hsla(0,0%,100%,.8), hsla(0,0%,100%,.2));
+  border-color: hsla(210,54%,20%,.3) hsla(210,54%,20%,.35) hsla(210,54%,20%,.4);
+  box-shadow: 0 1px 0 hsla(0,0%,100%,.3) inset,
+              0 0 0 1px hsla(0,0%,100%,.3) inset,
+              0 1px 0 hsla(210,54%,20%,.03),
+              0 0 2px hsla(210,54%,20%,.1);
+  -moz-transition-property: background-color, border-color, box-shadow;
+  -moz-transition-duration: 150ms;
+  -moz-transition-timing-function: ease;
+}
+.toolbarButton.backButton:hover:active {
+  background-color: #c3ced9;
+  -moz-transition-property: background-color, border-color, box-shadow;
+  -moz-transition-duration: 10ms;
+  -moz-transition-timing-function: linear;
+}
+
+.toolbarButton.backButton::before {
+  display: inline-block;
+  content: url(images-win7/toolbarButton-back.png);
+  width: 18px;
+  height: 18px;
+}
+
+.toolbarButton.forwardButton {
+  padding: 3px 4px 3px 10px;
+  mask: url(images-win7/keyhole-forward-mask.svg#mask);
+}
+.toolbarButton.forwardButton::before {
+  display: inline-block;
+  content: url(images-win7/toolbarButton-Forward.png);
+}
+.toolbarButton.forwardButton:hover {
+  mask: url(images-win7/keyhole-forward-mask.svg#mask-hover);
+}
+
+.menuToolbarButton.feedButton::before {
+  display: inline-block;
+  content: url(images-win7/toolbarButton-feed.png);
+}
+
+.toolbarButton.newWindowButton::before {
+  display: inline-block;
+  content: url(images-win7/toolbarButton-newWindow.png);
+}
+
+.toolbarButton.fullscreenButton::before {
+  display: inline-block;
+  content: url(images-win7/toolbarButton-fullscreen.png);
+}
+
+.toolbarButton.zoomOut::before {
+  display: inline-block;
+  content: url(images-win7/toolbarButton-zoomOut.png);
+}
+.toolbarButton.zoomIn::before {
+  display: inline-block;
+  content: url(images-win7/toolbarButton-zoomIn.png);
+}
+
+.toolbarButton.historyButton::before {
+  display: inline-block;
+  content: url(images-win7/toolbarButton-history.png);
+}
+
+.toolbarButton.bookmarkStar::before {
+  display: inline-block;
+  content: url(images-win7/toolbarButton-bookmarkUnstarred.png);
+}
+.toolbarButton.bookmarkStar.starred::before {
+  display: inline-block;
+  content: url(images-win7/toolbarButton-bookmarkStarred.png);
+}
+
+.menuToolbarButton.bookmarksButton::before {
+  display: inline-block;
+  content: url(images-win7/toolbarButton-bookmarks.png);
+}
+
+.toolbarButton.downloadButton::before {
+  display: inline-block;
+  content: url(images-win7/toolbarButton-download.png);
+}
+
+.toolbarButton.firefoxButton::before {
+  display: inline-block;
+  content: url(images-win7/toolbarButton-customize.png);
+}
+
+.menuToolbarButton.placeholderButton::before,
+.toolbarButton.placeholderButton::before {
+  display: inline-block;
+  content: url(images-win7/toolbarButton-placeholder.png);
+}
+
+.toolbarButton:hover,
+.menuToolbarButton:hover {
+  background-color: hsla(210,32%,93%,.2);
+  background-image: -moz-linear-gradient(hsla(0,0%,100%,.6), hsla(0,0%,100%,.1));
+  background-clip: padding-box;
+  border: 1px solid hsla(210,54%,20%,.2);
+  border-color: hsla(210,54%,20%,.15) hsla(210,54%,20%,.2) hsla(210,54%,20%,.25);
+  box-shadow: 0 1px 0 hsla(0,0%,100%,.3) inset,
+              0 0 0 1px hsla(0,0%,100%,.2) inset,
+              0 1px 0 hsla(210,54%,20%,.03);
+  -moz-transition-property: background-color, border-color, box-shadow;
+  -moz-transition-duration: 150ms;
+  -moz-transition-timing-function: ease;
+}
+
+.toolbarButton:hover:active,
+.menuToolbarButton:hover:active {
+  background-color: hsla(210,54%,20%,.15);
+  border-color: hsla(210,54%,20%,.3) hsla(210,54%,20%,.35) hsla(210,54%,20%,.4);
+  box-shadow: 0 1px 1px hsla(210,54%,20%,.1) inset,
+              0 0 1px hsla(210,54%,20%,.2) inset;
+  -moz-transition-property: background-color, border-color, box-shadow;
+  -moz-transition-duration: 10ms;
+  -moz-transition-timing-function: linear;
+}
+
+
+.toolbarButtonSeparator {
+  -moz-box-flex: 0;
+  width: 3px;
+  min-width: 3px;
+  margin: 0 3px 0 1px;
+  background-image: -moz-linear-gradient(hsla(0,0%,100%,0), hsla(0,0%,100%,.3) 30%, hsla(0,0%,100%,.3) 70%, hsla(0,0%,100%,0)),
+                    -moz-linear-gradient(hsla(210,54%,20%,0), hsla(210,54%,20%,.3) 30%, hsla(210,54%,20%,.3) 70%, hsla(210,54%,20%,0)),
+                    -moz-linear-gradient(hsla(0,0%,100%,0), hsla(0,0%,100%,.3) 30%, hsla(0,0%,100%,.3) 70%, hsla(0,0%,100%,0));
+  background-size: 1px, 1px, 1px;
+  background-position: top left, top center, top right;
+  background-repeat: no-repeat;
+}
+
+.toolbarButton.menuOpen {
+  background-color: hsla(210,54%,20%,.15) !important;
+  border-color: hsla(210,54%,20%,.3) hsla(210,54%,20%,.35) hsla(210,54%,20%,.4) !important;
+  box-shadow: 0 1px 1px hsla(210,54%,20%,.1) inset,
+              0 0 1px hsla(210,54%,20%,.2) inset  !important;
+}
+
+
+.locationBar {
+  display: -moz-box;
+  -moz-box-flex: 1;
+  margin: 8px 6px 8px 0;
+  -moz-padding-start:16px;
+  -moz-padding-end: 0;
+  max-height: 26px;
+  background-color: hsla(0,0%,100%,.9);
+  border: 1px solid transparent;
+  border-color: hsla(210,54%,20%,.25) hsla(210,54%,20%,.27) hsla(210,54%,20%,.3);
+  border-radius: 2px;
+  box-shadow: 0 1px 0 hsla(0,0%,0%,.01) inset,
+              0 1px 0 hsla(0,0%,100%,.1);
+  color: #808080;
+  font-size: 12px;
+  line-height: 20px;
+  outline-style: none;
+  overflow: hidden;
+}
+.toolbarButton.backButton + .locationBar {
+  -moz-margin-start: -20px;
+}
+
+.locationBarLabel {
+  -moz-box-flex: 1;
+  min-width: 60px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.locationBar:hover {
+  border-color: hsla(210,54%,20%,.35) hsla(210,54%,20%,.37) hsla(210,54%,20%,.4);
+  background-color: hsla(0,0%,100%,1);
+}
+
+.locationBar:focus {
+  background-color: hsla(0,0%,100%,1);
+  border-color: #65bbfc #6bb7ed #65afe0;
+}
+
+
+.domainName {
+  color: #1a1a1a;
+}
+
+.domainName.firefoxPage {
+  color: #994000;
+}
+
+
+.stopGoReload {
+  -moz-box-flex: 0;
+  padding: 3px 4px;
+  border-left: 1px solid transparent;
+  -moz-user-select:none;
+  cursor: default;
+  font-size: 0;
+  line-height: 0;
+}
+.stopGoReload:hover {
+  background-image: -moz-linear-gradient(hsl(200,100%,65%), hsl(200,82%,49%));
+  border-left: 1px solid hsla(200,100%,18%,.2);
+  box-shadow: inset 0 1px 0 hsla(0,0%,100%,.1),
+              inset 0 0 2px hsla(0,0%,100%,.15),
+              0 0 0 1px hsla(210,54%,20%,.05);
+}
+.stopGoReload:hover:active {
+  background-image: -moz-linear-gradient(hsla(200,100%,18%,.05), hsla(200,100%,18%,.05)),
+                    -moz-linear-gradient(hsl(200,100%,65%), hsl(200,82%,49%));
+  box-shadow: inset 0 1px 0 hsla(200,100%,18%,.2),
+              inset 0 0 3px hsla(200,100%,18%,.25);
+}
+
+.stopGoReload::before {
+  display: inline-block;
+  content: url(images-win7/reloadStopGo-reload.png);
+  width: 16px;
+  height: 16px;
+}
+.stopGoReload:hover::before {
+  content: url(images-win7/reloadStopGo-reload-hoverActive.png);
+}
+
+
+
+
+/* ContentArea */
+.contentArea {
+  display: -moz-box;
+  padding: 0;
+  -moz-box-flex: 1;
+  border-radius: 0 0 2.5px 2.5px;
+  background-color: white;
+  background-image: url(images-general/webpage-thePlanetarium.jpg);
+  background-position: top left;
+  background-size: cover;
+  background-repeat: no-repeat;
+  overflow: hidden;
+}
+
+
+
+/* Customize Content Area */
+
+.customizeContentContainer {
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-flex: 1;
+  width: 100%;
+  height: 100%;
+  background-color: #edf4fc;
+  background-image: url(images-general/background-noise-toolbar.png);
+  
+}
+
+.customizeThemesArea {
+  -moz-box-flex: 1;
+  padding: 16px;
+  background-color: hsla(0,0%,100%,.2);
+}
+
+.customizeToolsArea {
+/*   -moz-box-flex: 1; */
+  padding: 16px;
+}
+
+.customizeMenuArea {
+/*   -moz-box-flex: 1; */
+  padding: 16px;
+  background-image: url(images-win7/customizeMenuBackground.jpg);
+  background-size: cover;
+}
+.customizeMenuPseudoMenu {
+  padding: 16px;
+  height: 100%;
+  background-color: hsla(210,5%,97%,.8);
+  border-radius: 2.5px;
+  box-shadow: 0 1px 0 hsla(0,0%,100%,.2) inset,
+              0 0 0 1px hsla(0,0%,0%,.2),
+              0 1px 2px hsla(0,0%,0%,.2);
+}
+.customizeMenuPseudoMenu-controlRow {
+  display: -moz-box;
+  height: 32px;
+  width: 100%;
+}
+.customizeMenuPseudoMenu-controlRowSpacer {
+  -moz-box-flex: 1;
+}
+.customizeMenuPseudoMenu-rowSeparator {
+  margin: 0 -16px;
+  height: 1px;
+  background-color: hsla(0,0%,0%,.15);
+  background-clip: padding-box;
+  border-top: 1px solid hsla(0,0%,100%,.3);
+  border-bottom: 1px solid hsla(0,0%,100%,.3);
+}
+
+.customizeMenuPseudoMenu-controlRowLabel {
+  padding-left: 6px;
+  color: #525c66;
+  font-size: 11px;
+  line-height: 32px;
+  height: 32px;
+}
+
+.customizeMenuPseudoMenu-controlRowButtons {
+  display: -moz-box;
+  height: 24px;
+}
+
+.customizeMenuPseudoMenu-controlRowButton {
+  width: 48px;
+  margin: 4px 0;
+  font-size: 10px;
+  line-height: 24px;
+  text-align: center;
+  border-right: 1px solid hsla(0,0%,0%,.2);
+}
+.customizeMenuPseudoMenu-controlRowButton:last-child {
+  border-right: none;
+}
+
+
+.customizeSegmentSeparator {
+  -moz-box-flex: 0;
+  width: 3px;
+  min-width: 3px;
+  background-image: -moz-linear-gradient(hsla(0,0%,100%,0), hsla(0,0%,100%,.3) 15%, hsla(0,0%,100%,.3) 85%, hsla(0,0%,100%,0)),
+                    -moz-linear-gradient(hsla(210,54%,20%,0), hsla(210,54%,20%,.15) 15%, hsla(210,54%,20%,.15) 85%, hsla(210,54%,20%,0)),
+                    -moz-linear-gradient(hsla(0,0%,100%,0), hsla(0,0%,100%,.3) 15%, hsla(0,0%,100%,.3) 85%, hsla(0,0%,100%,0));
+  background-size: 1px, 1px, 1px;
+  background-position: top left, top center, top right;
+  background-repeat: no-repeat;
+}
+
+
+.customizeCategoryHeader {
+  padding-bottom: 12px;
+  color: #506273;
+  font-size: 14px;
+  text-transform: uppercase;
+  line-height: 14px;
+}
+.customizeMenuArea > .customizeCategoryHeader {
+  color: hsla(0,0%,100%,.8);
+  padding-bottom: 27px;
+}
+
+.customizeToolbarItem {
+  float: left;
+/*
+  display: -moz-box;
+  -moz-box-orient: vertical;
+*/
+  padding: 7px 0;
+  margin-right: 6px;
+  margin-bottom: 6px;
+  border: 1px solid transparent;
+  border-radius: 2.5px;
+  text-align: center;
+  clear: right;
+}
+.customizeToolbarItem:last-child {
+  margin-right: 0;
+}
+
+.customizeToolbarItem:hover {
+  background-color: hsla(210,32%,99%,.4);
+/*   background-image: -moz-linear-gradient(hsla(0,0%,100%,.6), hsla(0,0%,100%,.1)); */
+  background-clip: padding-box;
+  border: 1px solid hsla(210,54%,20%,.3);
+/*   border-color: hsla(210,54%,20%,.15) hsla(210,54%,20%,.2) hsla(210,54%,20%,.25); */
+  box-shadow: 0 1px 0 hsla(0,0%,100%,.3) inset,
+              0 0 0 1px hsla(0,0%,100%,.2) inset;
+  -moz-transition-property: background-color, border-color, box-shadow;
+  -moz-transition-duration: 150ms;
+  -moz-transition-timing-function: ease;
+}
+
+
+.customizeToolbarItemLabel {
+  padding-top: 8px;
+  width: 68px;
+  height: 10px;
+  font-size: 10px;
+  line-height: 10px;
+  overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.customizeToolbarItem-placeholder {
+  float: left;
+  padding: 7px 0;
+  margin-right: 6px;
+  margin-bottom: 6px;
+  background-color: hsla(0,0%,100%,.1);
+  border: 1px dashed hsla(210,54%,20%,.3);
+  border-radius: 2.5px;
+  box-shadow: 0 1px 0 hsla(0,0%,100%,.1);
+  text-align: center;
+}
+.customizeToolbarItem-placeholder:last-child {
+  margin-right: 0;
+}
+
+
+.windowControls.customizeMode,
+.tab:not(.active).customizeMode,
+.locationBar.customizeMode,
+.firefoxButton.customizeMode {
+  filter: url(effects.svg#desaturateImageCustomizeMode);
+  opacity: .7;
+}
+
+.backButton.customizeMode {
+  filter: url(effects.svg#desaturateImageCustomizeMode);
+}
+
+/*Arrow Panel*/
+.arrowPanelContainer {
+  position: absolute;
+  top: 70px;
+  right: 0;
+/*   background-color: hsla(300,50%,60%,.3); */
+  opacity: 0;
+  z-index: 9999;
+  -moz-transform: scale(0);
+  -moz-transform-origin: top right;
+  -moz-transition: all ease 200ms;
+}
+#arrowPanel {
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  margin-top: -15px;
+  padding: 0;
+  height: 400px;
+  border-width: 7px 9px 11px 9px;
+  border-style: solid;
+  -moz-border-image: url(images/panel-borderImage.png) 7 9 11 9 fill repeat;
+}
+.arrowPanelArrowTop {
+  position: relative;
+  margin-right: 14px;
+  padding: 0;
+  height: 27px;
+  background-image: url(images/panel-arrowTop.png);
+  background-repeat: no-repeat;
+  background-position: right top;
+  z-index: 9999;
+  pointer-events: none;
+}
+
+.arrowPanelAnimate {
+  opacity: .95;
+  -moz-transform: scale(1);
+  -moz-transform-origin: top right;
+  -moz-transition: all ease 200ms;
+}
+
+.panelSectionEdit {
+  padding: 12px 20px;
+  margin: -4px -4px 0;
+  border-bottom: 1px solid hsla(0,0%,0%,.1);
+}
+
+.panelToolbarIcons {
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  margin: 0 -4px;
+  padding: 6px;
+  height: 46px;
+  border-top: 1px solid hsla(0,0%,100%,.5);
+  border-bottom: 1px solid hsla(0,0%,100%,.5);
+}
+.panelToolbarIconsRow {
+/*   background-color: hsla(300,50%,60%,.5); */
+}
+
+.panelAddons {
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  margin: 0 -4px;
+  padding: 6px;
+  background-color: hsla(0,0%,0%,.05);
+  border-top: 1px solid hsla(0,0%,0%,.05);
+  border-bottom: 1px solid hsla(0,0%,0%,.05);
+}
+
+.panelFooter {
+  margin: 0 -4px;
+  padding: 6px;
+  border-top: 1px solid hsla(0,0%,100%,.5);
+}
+
+#customize * {
+  float: right;
+  padding: 2px 6px;
+  background-color: hsla(0,0%,100%,.2);
+  background-image: -moz-linear-gradient(hsla(0,0%,100%,.5), hsla(0,0%,100%,.1));
+  border: 1px solid hsla(0,0%,0%,.2);
+  border-radius: 2.5px;
+  box-shadow: inset 0 1px 0 hsla(0,0%,100%,.5),
+              0 1px 0 hsla(0,0%,100%,.5);
+}
+#customize *:hover {
+  background-color: hsla(0,0%,100%,.5);
+  border-color: hsla(0,0%,0%,.3);
+  box-shadow: inset 0 1px 0 hsla(0,0%,100%,.5),
+              0 0 3px hsla(0,0%,0%,.2),
+              0 1px 0 hsla(0,0%,100%,.5);
+}
+#customize *:hover:active {
+  background-color: hsla(0,0%,0%,.2);
+  border-color: hsla(0,0%,0%,.3);
+  box-shadow: inset 0 1px 0 hsla(0,0%,0%,.1),
+              0 0 3px hsla(0,0%,0%,.2),
+              0 1px 0 hsla(0,0%,100%,.5);
+  -moz-transition-property: background-color, border-color, box-shadow;
+  -moz-transition-duration: 10ms;
+  -moz-transition-timing-function: linear;
+}
+.panelAddNewButton::after {
+  display: inline-block;
+  content: url(images/panelAddNewButton-Icon.png);
+}
+.panelAddNewLabel {
+  display: none;
+  font-size: 11px;
+  line-height: 18px;
+}
+
+/*Panel Edit Buttons*/
+.panelSectionEditContainer {
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  width: 100%;
+  height: 20px;
+  border: 1px solid hsla(0,0%,0%,.15);
+  border-radius: 2.5px;
+  box-shadow: inset 0 1px 0 hsla(0,0%,100%,.5),
+              0 1px 0 hsla(0,0%,100%,.5);
+}
+
+.panelSectionEditContainerButton {
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-pack: center;
+  -moz-box-flex: 1;
+  border-right: 1px solid hsla(0,0%,0%,.15);
+  -moz-transition-property: background-color, border-color, box-shadow;
+  -moz-transition-duration: 150ms;
+  -moz-transition-timing-function: ease;
+  -moz-user-select: none;
+  cursor: default;
+}
+.panelSectionEditContainerButton:last-child {
+  border-right: none;
+}
+.panelSectionEditContainerButton:hover {
+  background-color: hsla(0,0%,100%,.5);
+  box-shadow: 0 0 3px hsla(0,0%,0%,.2);
+}
+
+.panelSectionEditContainerIcon {
+  margin-right: 2px;
+  padding: 2px;
+  pointer-events: none;
+}
+.panelSectionEditContainerLabel {
+  font-size: 11px;
+  line-height: 18px;
+}
+
+
+/*Panel Buttons*/
+.menuPanelButton {
+  float: left;
+  margin: 0;
+  padding: 8px 6px;
+  width: 64px;
+  border: 1px solid transparent;
+  -moz-user-select: none;
+  cursor: default;
+  -moz-transition-property: background-color, border-color, box-shadow;
+  -moz-transition-duration: 150ms;
+  -moz-transition-timing-function: ease;
+}
+.menuPanelButton:hover {
+  background-color: hsla(210,48%,90%,.1);
+  background-image: -moz-linear-gradient(hsla(0,0%,100%,.8), hsla(0,0%,100%,.1));
+  background-clip: padding-box;
+  border: 1px solid hsla(210,54%,20%,.2);
+  border-color: hsla(210,54%,20%,.13) hsla(210,54%,20%,.16) hsla(210,54%,20%,.2);
+  border-radius: 3px;
+  box-shadow: 0 1px 0 hsla(0,0%,100%,.3) inset,
+              0 0 0 1px hsla(0,0%,100%,.3) inset,
+              0 1px 0 hsla(210,54%,20%,.03);
+}
+.menuPanelButton:hover:active {
+  background-color: hsla(210,48%,90%,.4);
+  border-color: #8acbf9 #7bbdea #6db0de;
+  box-shadow: 0 1px 0 hsla(0,0%,100%,.3) inset,
+              0 0 0 1px hsla(0,0%,100%,.3) inset,
+              0 0 5px hsla(204,73%,70%,.5);
+  -moz-transition-property: background-color, border-color, box-shadow;
+  -moz-transition-duration: 10ms;
+  -moz-transition-timing-function: linear;
+}
+
+.menuPanelButton > .button {
+  margin: 0 auto 3px;
+  width: 32px;
+  height: 32px;
+  -moz-user-select:none;
+  cursor: default;
+}
+.menuPanelButton > .label {
+  margin: 0;
+  width: 64px;
+  height: 16px;
+  color: hsl(218,10%,40%);
+  font-size: 11px;
+  line-height: 16px;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.menuPanelButton.newWindowButton > .button::after {
+  display: inline-block;
+  content: url(images/paletteButton-newWindow.png);
+}
+
+.menuPanelButton.printButton > .button::after {
+  display: inline-block;
+  content: url(images/paletteButton-print.png);
+}
+
+.menuPanelButton.panoramaButton > .button::after {
+  display: inline-block;
+  content: url(images/paletteButton-panorama.png);
+}
+
+.menuPanelButton.syncButton > .button::after {
+  display: inline-block;
+  content: url(images/paletteButton-sync.png);
+}
+
+.menuPanelButton.historyButton > .button::after {
+  display: inline-block;
+  content: url(images/paletteButton-history.png);
+}
+
+.menuPanelButton.subscribeButton > .button::after {
+  display: inline-block;
+  content: url(images/paletteButton-feed.png);
+}
+
+.menuPanelButton.fullscreenButton > .button::after {
+  display: inline-block;
+  content: url(images/paletteButton-fullscreen.png);
+}
+
+
+/*Twitter*/
+.panelAddons .menuPanelButton > .button {
+  background-color: hsla(210,48%,90%,.1);
+  background-image: -moz-linear-gradient(hsla(0,0%,100%,.8), hsla(0,0%,100%,.1));
+  background-clip: padding-box;
+  border: 1px solid hsla(210,54%,20%,.2);
+  border-color: hsla(210,54%,20%,.13) hsla(210,54%,20%,.16) hsla(210,54%,20%,.2);
+  border-radius: 3px;
+  box-shadow: 0 1px 0 hsla(0,0%,100%,.3) inset,
+              0 0 0 1px hsla(0,0%,100%,.3) inset,
+              0 1px 0 hsla(210,54%,20%,.03);
+  -moz-transition-property: background-color, border-color, box-shadow;
+  -moz-transition-duration: 150ms;
+  -moz-transition-timing-function: ease;
+  -moz-user-select:none;
+  cursor: default;
+}
+
+.panelAddons .menuPanelButton.twitterButton > .button {
+  background-color: #0aa1d4;
+  background-origin: border-box;
+  background-clip: border-box;
+  background-image: -moz-linear-gradient(hsla(195,100%,70%,.8), hsla(195,100%,70%,0));
+  border-color: hsla(200,100%,15%,.3);
+}
+.panelAddons .menuPanelButton.twitterButton > .button::after {
+  display: inline-block;
+  content: url(images/paletteButton-twitter.png);
+}
+
+/*Yahoo!*/
+.panelAddons .menuPanelButton.yahooButton > .button {
+  background-color: #790098;
+  background-image: -moz-linear-gradient(hsla(288,100%,77%,0) 30%, hsla(288,100%,77%,.6));
+  background-origin: border-box;
+  background-clip: border-box;
+  border-color: hsla(288,100%,18%,.6);
+}
+.panelAddons .menuPanelButton.yahooButton > .button::after {
+  display: inline-block;
+  content: url(images/paletteButton-yahoo.png);
+}
+
+/*Weather*/
+.panelAddons .menuPanelButton.weatherButton > .button {
+  background-color: #452098;
+  background-image: url(images/paletteButton-weather.png),
+                    -moz-linear-gradient(hsla(260,100%,82%,0) 30%, hsla(260,100%,82%,.6));
+  background-origin: border-box;
+  background-clip: border-box;
+  border-color: hsla(259,100%,24%,.6);
+}
+
+/*Adblock*/
+.panelAddons .menuPanelButton.adblockButton > .button {
+  background-color: none;
+  background-image: none;
+  background-clip: padding-box;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  box-shadow: none;
+}
+.panelAddons .menuPanelButton.adblockButton > .button::after {
+  display: inline-block;
+  content: url(images/paletteButton-abp.png);
+}

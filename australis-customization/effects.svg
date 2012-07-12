@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg">
+
+  <filter id="desaturateImage">
+    <feColorMatrix type="saturate" values="0.8"/>
+  </filter>
+
+  <filter id="desaturateImageCustomizeMode">
+    <feColorMatrix type="saturate" values=".2"/>
+  </filter>
+
+  <filter id="colorImage">
+    <feColorMatrix type="saturate" values="1"/>
+  </filter>
+
+</svg>
