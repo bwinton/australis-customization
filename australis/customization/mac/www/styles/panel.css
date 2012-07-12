@@ -60,26 +60,11 @@
 
 .panelFooter {
   -moz-box-flex: 1;
-  -moz-align-content: center;
   margin: 0 -4px;
   padding: 9px;
   padding-top: 16px;
   background-color: hsla(0,0%,0%,.05);
   border-top: 1px solid hsla(0,0%,0%,.1);
-}
-
-/* Context Menu */
-
-#panelContext {
-  position: absolute;
-  font-size: 11px;
-  line-height: 16px;
-  display: none;
-
-  padding: 0;
-  border-width: 7px 9px 11px 9px;
-  border-style: solid;
-  -moz-border-image: url(../images/panel-borderImage.png) 7 9 11 9 fill repeat;
 }
 
 /* Panel Buttons */

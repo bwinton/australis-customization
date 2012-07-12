@@ -42,6 +42,18 @@ define(function (require) {
       $(document).delegate('div.menuButton[custom!="true"]', 'click', function() {
         toggleMenuPanel();
       });
+
+      if (window.location.search == "?scroll") {
+        var current = 0;
+        setInterval(function scrollBg(){
+          current -= 1;
+          if (current >= 8871){
+            current = 0;
+          }
+          $(".contentArea").css("background-position",current+"px 0");
+        }, 50);
+      }
+
       $('#customize').click(toggleCustomizeTab);
       $('.bookmarkStar').click(toggleBookmarkStar);
       $('.customizeToolbarItem').draggable({
@@ -76,17 +88,25 @@ define(function (require) {
         }
       });
 
-      $("panel-button").mouseup(function(e) {
-        // If we got a right-click
-        if (e.button == 2) {
-          var offset = $("#arrowPanel").offset();
-          $("#panelContext").css({top: e.pageY - offset.top,
-                                  left: e.pageX - offset.left})
-                            .fadeIn('fast');
-        }
-      }).bind("contextmenu", function(e) {
-        e.preventDefault();
+      $("#arrowPanel").contextMenu({menu: "panelContext"}, function(a, el, pos) {
+        alert(
+            "Action: " + a + "\n\n" +
+            "Element ID: " + $(el).attr("id") + "\n\n" +
+            "X: " + pos.x + "  Y: " + pos.y + " (relative to element)\n\n" +
+            "X: " + pos.docX + "  Y: " + pos.docY+ " (relative to document)"
+            );
       });
+
+
+      $("panel-button").contextMenu({menu: "buttonContext"}, function(a, el, pos) {
+        alert(
+            "Action: " + a + "\n\n" +
+            "Element ID: " + $(el).attr("type") + "\n\n" +
+            "X: " + pos.x + "  Y: " + pos.y + " (relative to element)\n\n" +
+            "X: " + pos.docX + "  Y: " + pos.docY+ " (relative to document)"
+            );
+      });
+
     });
   });
 });

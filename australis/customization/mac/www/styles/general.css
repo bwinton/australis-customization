@@ -72,8 +72,8 @@ body {
   border-radius: 0 0 2.5px 2.5px;
   background-color: white;
   background-image: url(../images/webpage-theHobbit.jpg);
-  background-position: top left;
+  background-position: 0 0;
   background-size: cover;
-  background-repeat: no-repeat;
-  /* overflow: hidden; */
+  /* background-repeat: no-repeat;
+  overflow: hidden; */
 }

@@ -6,10 +6,21 @@
     <link href="styles/general.css" type="text/css" rel="stylesheet" />
     <link href="styles/toolbar.css" type="text/css" rel="stylesheet" />
     <link href="styles/panel.css" type="text/css" rel="stylesheet" />
+    <link href="styles/contextMenu.css" type="text/css" rel="stylesheet" />
     <script data-main="js/app" src="js/lib/require.js"></script>
   </head>
   
   <body spellcheck="false">
+
+    <ul id="buttonContext" class="contextMenu">
+      <li><a href="#add">Add to Toolbar</a></li>
+      <li><a href="#remove">Remove from Menu</a></li>
+      <li class="separator"><a href="#customize">Customize</a></li>
+    </ul>
+
+    <ul id="panelContext" class="contextMenu">
+      <li><a href="#addMore">Add more items</a></li>
+    </ul>
 
     <div class="outerContainer">
       <!-- Window [Start] -->
@@ -19,13 +30,6 @@
           <div class="arrowPanelArrowTop"></div>
           <div id="arrowPanel">
         
-            <div id="panelContext">
-              <div>Add to Toolbar</div>
-              <div>Remove from Menu</div>
-              <hr>
-              <div>Customize</div>
-            </div>
-
             <div class="panelToolbarIcons">
             
               <div class="panelToolbarIconsRow">
