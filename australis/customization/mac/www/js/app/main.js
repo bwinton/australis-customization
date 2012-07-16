@@ -89,22 +89,34 @@ define(function (require) {
       });
 
       $("#arrowPanel").contextMenu({menu: "panelContext"}, function(a, el, pos) {
-        alert(
-            "Action: " + a + "\n\n" +
-            "Element ID: " + $(el).attr("id") + "\n\n" +
-            "X: " + pos.x + "  Y: " + pos.y + " (relative to element)\n\n" +
-            "X: " + pos.docX + "  Y: " + pos.docY+ " (relative to document)"
-            );
+        switch (a) {
+        case "addMore":
+          toggleCustomizeTab();
+          break;
+        default:
+          alert(
+              "Action: " + a + "\n\n" +
+              "Element ID: " + $(el).attr("id") + "\n\n" +
+              "X: " + pos.x + "  Y: " + pos.y + " (relative to element)\n\n" +
+              "X: " + pos.docX + "  Y: " + pos.docY+ " (relative to document)"
+              );
+        }
       });
 
 
       $("panel-button").contextMenu({menu: "buttonContext"}, function(a, el, pos) {
-        alert(
-            "Action: " + a + "\n\n" +
-            "Element ID: " + $(el).attr("type") + "\n\n" +
-            "X: " + pos.x + "  Y: " + pos.y + " (relative to element)\n\n" +
-            "X: " + pos.docX + "  Y: " + pos.docY+ " (relative to document)"
-            );
+        switch (a) {
+        case "customize":
+          toggleCustomizeTab();
+          break;
+        default:
+          alert(
+              "Action: " + a + "\n\n" +
+              "Element ID: " + $(el).attr("id") + "\n\n" +
+              "X: " + pos.x + "  Y: " + pos.y + " (relative to element)\n\n" +
+              "X: " + pos.docX + "  Y: " + pos.docY+ " (relative to document)"
+              );
+        }
       });
 
     });
