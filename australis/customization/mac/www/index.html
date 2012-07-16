@@ -33,36 +33,45 @@
             <div class="panelToolbarIcons">
             
               <div class="panelToolbarIconsRow">
-                <panel-button type="newWindow">New Window</panel-button>
-                <panel-button type="privateBrowsing">Guest Mode</panel-button>
-                <panel-button type="savePage">Save Page</panel-button>
+                <panel-button type="newWindow" description="Open a new window"
+                              shortcut="Ctrl+N">New Window</panel-button>
+                <panel-button type="privateBrowsing" description="Enter private browsing mode"
+                              shortcut="Ctrl+Shift-P">Guest Mode</panel-button>
+                <panel-button type="savePage" description="Save the current page"
+                              shortcut="Ctrl+S">Save Page</panel-button>
               </div>
 
               <div class="panelToolbarIconsRow">
-                <panel-button type="print">Print</panel-button>
-                <panel-button type="history">History</panel-button>
-                <panel-button type="fullScreen">Full Screen</panel-button>
+                <panel-button type="print" description="Print the current page"
+                              shortcut="Ctrl+P">Print</panel-button>
+                <panel-button type="history" description="Open a tab showing your history"
+                              shortcut="Ctrl+Shift+H">History</panel-button>
+                <panel-button type="fullScreen" description="Expand the window to fill the screen"
+                              shortcut="F11">Full Screen</panel-button>
               </div>
               
               <div class="panelToolbarIconsRow">
-                <panel-button type="find">Find</panel-button>
-                <panel-button type="options">Preferences</panel-button>
-                <panel-button type="addons">Add-ons</panel-button>
+                <panel-button type="find" description="Find some words in the current page"
+                              shortcut="Ctrl+F">Find</panel-button>
+                <panel-button type="options" description="Open Firefox’s options"
+                              shortcut="Ctrl+O">Preferences</panel-button>
+                <panel-button type="addons" description="Open a panel to manage your add-ons"
+                              shortcut="Ctrl+Shift+A">Add-ons</panel-button>
               </div>
 
             </div>
             <div class="panelSectionEdit">
               <div class="panelSectionEditContainer">
               
-                <div class="panelSectionEditContainerButton">
+                <div class="panelSectionEditContainerButton" title="Ctrl+X">
                   <div class="panelSectionEditContainerIcon"><img src="images/editIcon-cut.png" alt="editIcon-cut" width="16" height="16" /></div>
                   <div class="panelSectionEditContainerLabel">Cut</div>
                 </div>
-                <div class="panelSectionEditContainerButton">
+                <div class="panelSectionEditContainerButton" title="Ctrl+C">
                   <div class="panelSectionEditContainerIcon"><img src="images/editIcon-copy.png" alt="editIcon-cut" width="16" height="16" /></div>
                   <div class="panelSectionEditContainerLabel">Copy</div>
                 </div>
-                <div class="panelSectionEditContainerButton">
+                <div class="panelSectionEditContainerButton" title="Ctrl+V">
                   <div class="panelSectionEditContainerIcon"><img src="images/editIcon-paste.png" alt="editIcon-cut" width="16" height="16" /></div>
                   <div class="panelSectionEditContainerLabel">Paste</div>
                 </div>
@@ -70,13 +79,13 @@
               </div>
               <div class="panelSectionEditContainer">
               
-                <div class="panelSectionEditContainerButton">
+                <div class="panelSectionEditContainerButton" title="Ctrl++">
                   <div class="panelSectionEditContainerLabel">+</div>
                 </div>
-                <div class="panelSectionEditContainerButton">
+                <div class="panelSectionEditContainerButton" title="Ctrl+0">
                   <div class="panelSectionEditContainerLabel">100%</div>
                 </div>
-                <div class="panelSectionEditContainerButton">
+                <div class="panelSectionEditContainerButton" title="Ctrl+-">
                   <div class="panelSectionEditContainerLabel">-</div>
                 </div>
 
