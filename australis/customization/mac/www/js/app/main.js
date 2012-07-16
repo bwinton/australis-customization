@@ -6,7 +6,7 @@ define(function (require) {
   console.log('Hello world');
   require(["jquery", "underscore", "backbone"], function($, _, Backbone) {
     // Load in jquery-ui _after_ jquery, and load our custom x-tags while we're here.
-    require(["jquery-ui", "jquery.contextMenu", "./tags"]);
+    require(["jquery-ui", "jquery.contextMenu", "./tags", "./models"]);
 
     function toggleBookmarkStar() {
       $('.bookmarkStar').toggleClass('starred');
