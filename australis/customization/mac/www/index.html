@@ -7,6 +7,7 @@
     <link href="styles/toolbar.css" type="text/css" rel="stylesheet" />
     <link href="styles/panel.css" type="text/css" rel="stylesheet" />
     <link href="styles/contextMenu.css" type="text/css" rel="stylesheet" />
+    <link href="styles/customize.css" type="text/css" rel="stylesheet" />
     <script data-main="js/app" src="js/lib/require.js"></script>
   </head>
   
@@ -92,14 +93,28 @@
           <!-- NavBar [End] -->
   
           <div class="contentArea">
-            <div class="customizeContentContainer" style="display:none">
-              <div class="customizeToolsArea">
-                <div class="customizeCategoryHeader">More Tools to add to the Menu and Toolbar</div>
-              </div>
-              <div class="customizeSegmentSeparator"></div>
-              <div class="customizeMenuArea">
-                <!-- Menu goes here. -->
-              </div>
+            <div class="customizeContentContainer">
+              <x-tabbox tab-orient="left">
+                <x-tabs>
+                  <x-tab selected="true"><img src="images/tab-menu.png">Menu</x-tab>
+                  <x-tab><img src="images/tab-appearance.png">Appearance</x-tab>
+                  <x-tab><img src="images/tab-addons.png">Add-ons</x-tab>
+                </x-tabs>
+                <div class="tabPanelArrowLeft"></div>
+                <x-tabpanels>
+                  <x-tabpanel selected="true">
+                    <div class="customizeToolsArea">
+                      <div class="customizeCategoryHeader">More Tools to add to the Menu and Toolbar</div>
+                    </div>
+                    <div class="customizeSegmentSeparator"></div>
+                    <div class="customizeMenuArea">
+                      <!-- Menu goes here. -->
+                    </div>
+                  </x-tabpanel>
+                  <x-tabpanel>Personas and Appearance goes here…</x-tabpanel>
+                  <x-tabpanel>Your favourite add-ons go here…</x-tabpanel>
+                </x-tabpanels>
+              </x-tabbox>
             </div>
           </div>
 

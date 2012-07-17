@@ -13,7 +13,6 @@ define(function (require) {
     }
     
     function toggleCustomizeTab() {
-      $("div.customizeContentContainer").toggle();
       $("div.windowOuterContainer").toggleClass("customizeMode");
       $("div.window").toggleClass("customizeMode");
       $("div.backButton").toggleClass("customizeMode");
@@ -23,13 +22,17 @@ define(function (require) {
       if (button.hasClass("customizeMode")) {
         // We're in customize mode!!!
         button.attr("custom", true);
-        $("#arrowPanel").appendTo($("div.customizeMenuArea"));
+        $("#menuPanel").appendTo($("div.customizeMenuArea"));
         toggleMenuPanel();
         $("#customize").text("Done");
+        $("div.customizeContentContainer").css({"display":"-moz-box"});
+        $("div.customizeContentContainer").css({"display":"block"});
       } else {
         button.attr("custom", false);
-        $("#arrowPanel").appendTo($("div.arrowPanelContainer"));
+        $("#menuPanel").appendTo($("div.window"));
         $("#customize").text("Customize");
+        $("div.customizeContentContainer").css({"display":"none"});
+        toggleMenuPanel();
       }
     }
 
