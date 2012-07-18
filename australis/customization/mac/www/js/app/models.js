@@ -27,8 +27,8 @@ define(function (require) {
       buttonTmpl: _.template(
         "<div class='menuPanelButton <%= type %>'" +
         "     title='<%= description %>  (<%= shortcut %>)'>" +
-        "  <img src='images/button-<%= type %>.png'" +
-        "       class='button'>" +
+        "  <div style='background-image: url(\"images/button-<%= type %>.png\")'" +
+        "       class='button'></div>" +
         "  <div class='label'><%= label %></div>" +
         "</div>"),
 
