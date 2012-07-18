@@ -23,6 +23,7 @@ define(function (require) {
         // We're in customize mode!!!
         button.attr("custom", true);
         $("#menuPanel").appendTo($("div.customizeMenuArea"));
+        $("#menuPanel").css("z-index", 0);
         toggleMenuPanel();
         $("#customize").text("Done");
         $("div.customizeContentContainer").css({"display":"-moz-box"});
@@ -33,6 +34,7 @@ define(function (require) {
         button.attr("custom", false);
         $(".menuPanelButton").draggable("disable");
         $(".menuPanelButton").enableContextMenu();
+        $("#menuPanel").css("z-index", 9999);
         $("#menuPanel").appendTo($("div.window"));
         $("#customize").text("Customize");
         $("div.customizeContentContainer").css({"display":"none"});
