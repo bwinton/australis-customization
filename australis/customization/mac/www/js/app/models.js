@@ -24,6 +24,14 @@ define(function (require) {
     });
 
     var ButtonView = Backbone.View.extend({
+      buttonTmpl: _.template(
+        "<div class='menuPanelButton <%= type %>'" +
+        "     title='<%= description %>  (<%= shortcut %>)'>" +
+        "  <img src='images/button-<%= type %>.png'" +
+        "       class='button'>" +
+        "  <div class='label'><%= label %></div>" +
+        "</div>"),
+
       initialize: function (options) {
         this.collection.bind('add', this.addOne, this)
                        .bind('remove', this.removeOne, this)
@@ -44,10 +52,6 @@ define(function (require) {
     });
 
     var MenuPanel = ButtonView.extend({
-      buttonTmpl: _.template("<panel-button type='<%= type %>' " +
-        "description='<%= description %>' shortcut='<%= shortcut %>'>" +
-        "<%= label %></panel-button>"),
-
       render: function () {
         var self = this;
         var $el = $(this.el);
@@ -90,9 +94,6 @@ define(function (require) {
     menuPanel.render();
 
     var CustomizePanel = ButtonView.extend({
-      buttonTmpl: _.template("<panel-button type='<%= type %>' " +
-        "description='<%= description %>' shortcut='<%= shortcut %>'>" +
-        "<%= label %></panel-button>"),
 
       render: function () {
         var self = this;

@@ -19,7 +19,18 @@
   line-height: 14px;
 }
 
+.window.customizeMode .ui-draggable {
+  box-shadow: inset 0 5px 0 hsla(0,0%,100%,.5),
+            0 5px 0 hsla(0,0%,100%,.5);
+  cursor: -moz-grab;
+}
 
+.window.customizeMode .ui-draggable.ui-draggable-dragging {
+  cursor: -moz-grabbing;
+}
+
+
+/* Tabs! */
 x-tabbox, x-tabs, x-tab {
   display: -moz-box;
 }

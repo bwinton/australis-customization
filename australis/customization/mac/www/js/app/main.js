@@ -27,8 +27,12 @@ define(function (require) {
         $("#customize").text("Done");
         $("div.customizeContentContainer").css({"display":"-moz-box"});
         $("div.customizeContentContainer").css({"display":"block"});
+        $(".menuPanelButton").disableContextMenu();
+        $(".menuPanelButton").draggable("enable");
       } else {
         button.attr("custom", false);
+        $(".menuPanelButton").draggable("disable");
+        $(".menuPanelButton").enableContextMenu();
         $("#menuPanel").appendTo($("div.window"));
         $("#customize").text("Customize");
         $("div.customizeContentContainer").css({"display":"none"});
@@ -59,36 +63,13 @@ define(function (require) {
 
       $('#customize').click(toggleCustomizeTab);
       $('.bookmarkStar').click(toggleBookmarkStar);
-      $('.customizeToolbarItem').draggable({
-        containment: '.customizeContentContainer',
-        cursor: 'move',
+
+      $(".menuPanelButton").draggable({
+        disabled: true,
+        containment: '.windowOuterContainer',
         snap: '.customizeToolbarItem-placeholder',
-        revert: true
-      });
-      $('.customizeToolbarItem-placeholder').droppable({
-        accept: '.customizeToolbarItem',
-        hoverClass: 'hovered',
-        drop: function handleDropEvent( event, ui ) {
-          var draggable = ui.draggable;
-          draggable.draggable('option', 'revert', false);
-          draggable.offset($(this).offset());
-          setTimeout(function() {
-            draggable.draggable('option', 'revert', true);
-          }, 1000);
-        }
-      });
-      $('.customizeToolsArea').droppable({
-        accept: '.customizeToolbarItem',
-        hoverClass: 'hovered',
-        drop: function handleDropEvent( event, ui ) {
-          var draggable = ui.draggable;
-          draggable.draggable( 'option', 'revert', false );
-          // draggable.offset($(this).offset());
-          draggable.animate({left:'0px', top: '0px'});
-          setTimeout(function() {
-            draggable.draggable( 'option', 'revert', true );
-          }, 1000);
-        }
+        grid: [ 85, 72 ],
+        revert: "invalid",
       });
 
       $("#arrowPanel").contextMenu({menu: "panelContext"}, function(a, el, pos) {
@@ -106,8 +87,7 @@ define(function (require) {
         }
       });
 
-
-      $("panel-button").contextMenu({menu: "buttonContext"}, function(a, el, pos) {
+      $(".menuPanelButton").contextMenu({menu: "buttonContext"}, function(a, el, pos) {
         switch (a) {
         case "customize":
           toggleCustomizeTab();

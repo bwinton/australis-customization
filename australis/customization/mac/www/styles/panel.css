@@ -113,8 +113,6 @@
   margin: 3px 18px;
   width: 32px;
   height: 32px;
-  -moz-user-select:none;
-  cursor: default;
 }
 
 .menuPanelButton > .label {
