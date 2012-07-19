@@ -30,8 +30,16 @@ define(function (require) {
         $("div.customizeContentContainer").css({"display":"block"});
         $(".menuPanelButton").disableContextMenu();
         $(".menuPanelButton").draggable("enable");
+        setTimeout(function() {
+          $(".spacer").slideDown("fast", function() {
+            $(".menuPanelButtonHighlight").effect("pulsate", { times:3 }, 1000, function() {
+              $(".menuPanelButtonHighlight").hide("fade", {}, 1500);
+            });
+          });
+        }, 100);
       } else {
         button.attr("custom", false);
+        $(".spacer").slideUp("fast");
         $(".menuPanelButton").draggable("disable");
         $(".menuPanelButton").enableContextMenu();
         $("#menuPanel").css("z-index", 9999);

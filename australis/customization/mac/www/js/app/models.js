@@ -27,6 +27,7 @@ define(function (require) {
       buttonTmpl: _.template(
         "<div class='menuPanelButton <%= type %>'" +
         "     title='<%= description %>  (<%= shortcut %>)'>" +
+        "  <div class='menuPanelButtonHighlight'></div>" +
         "  <div style='background-image: url(\"images/button-<%= type %>.png\")'" +
         "       class='button'></div>" +
         "  <div class='label'><%= label %></div>" +
@@ -65,6 +66,15 @@ define(function (require) {
           }
           $el.children(":last-child").append(self.buttonTmpl(model.toJSON()));
         });
+
+        // Now add a row of spacers.
+        $el.append("<div class='panelToolbarIconsRow'>");
+        for (var i = 0; i < 3; i++) {
+          $el.children(":last-child").append(
+            "<div class='menuPanelButton spacer' title='Drop buttons here!'>" +
+            "  <div class='menuPanelButtonHighlight'></div>" +
+            "</div>");
+        };
       }
     });
 

@@ -11,8 +11,8 @@
 }
 
 .window.customizeMode .arrowPanelContainer {
-  top: 70px;
-  right: 30px;
+  top: 130px;
+  right: 90px;
 }
 
 .arrowPanelArrowTop {
@@ -87,6 +87,14 @@
   -moz-transition-timing-function: ease;
 }
 
+.menuPanelButtonHighlight {
+  position: absolute;
+  width: 68px;
+  height: 42px;
+  background: -moz-radial-gradient(circle closest-side, hsla(204,73%,70%,.8), hsla(204,73%,70%,0));
+  display: none;
+}
+
 .menuPanelButton:hover {
   background-color: hsla(210,48%,90%,.1);
   background-image: -moz-linear-gradient(hsla(0,0%,100%,.8), hsla(0,0%,100%,.1));
@@ -129,6 +137,24 @@
   white-space: nowrap;
 }
 
+.menuPanelButton.spacer {
+  display: none;
+  width: 60px;
+  height: 42px;
+  margin: 6px;
+  border: 1px dashed hsla(210,54%,20%,.2);
+  border-color: hsla(210,54%,20%,.13) hsla(210,54%,20%,.16) hsla(210,54%,20%,.2);
+  border-radius: 3px;
+}
+
+.panelSectionEditContainer.spacer {
+  display: none;
+  width: 231px;
+  height: 22px;
+  border: 1px dashed hsla(210,54%,20%,.2);
+  border-color: hsla(210,54%,20%,.13) hsla(210,54%,20%,.16) hsla(210,54%,20%,.2);
+  border-radius: 3px;
+}
 
 /*Panel Edit Buttons*/
 .panelSectionEditContainer {

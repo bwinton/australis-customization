@@ -46,6 +46,7 @@ body {
 
 .window.customizeMode {
   background-image: url(../images/windowBackgroundCustomizeMode.jpg);
+  background-size: 100% 100%;
 }
 
 /* OuterContainer */
@@ -60,7 +61,7 @@ body {
   -moz-transition-duration: 150ms;
 }
 .windowOuterContainer.customizeMode {
-  padding: 20px !important;
+  padding: 80px !important;
 }
 
 /* ContentArea */
