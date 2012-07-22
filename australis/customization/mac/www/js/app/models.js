@@ -118,6 +118,10 @@ define(function (require) {
           }
           $el.children(":last-child").append(self.buttonTmpl(model.toJSON()));
         });
+
+        // Now add the footer.
+        $el.append("<div class='customizeFooter'></div>");
+
       }
     });
 

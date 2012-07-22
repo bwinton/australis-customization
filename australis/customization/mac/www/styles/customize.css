@@ -19,6 +19,17 @@
   line-height: 14px;
 }
 
+.customizeFooter {
+  position: absolute;
+  width: 634px;
+  height: 52px;
+  top: 600px;
+  left: 250px;
+
+  background-color: hsla(0,0%,0%,.05);
+  border-top: 1px solid hsla(0,0%,0%,.1);
+}
+
 .window.customizeMode .ui-draggable {
   cursor: -moz-grab;
 }
@@ -91,6 +102,8 @@ x-tabpanels {
   margin: 5px;
   margin-top: 14px;
   margin-left: -6px;
+  min-height: 511px;
+  min-width: 634px;
 }
 
 .tabPanelArrowLeft {
