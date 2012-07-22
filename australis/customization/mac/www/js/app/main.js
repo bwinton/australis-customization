@@ -57,6 +57,10 @@ define(function (require) {
 
     $(function() {
       $(document).delegate('div.menuButton[custom!="true"]', 'click', function() {
+        var evt = document.createEvent('Event');
+        evt.initEvent('tpemit', true, true);
+        document.body.dispatchEvent(evt);
+
         toggleMenuPanel();
       });
 
