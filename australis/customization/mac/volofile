@@ -11,12 +11,26 @@ define(function (require) {
       },
 
       run: function (d, v, namedArgs) {
-        //Remove the old dir
-        v.rm('www-built');
+        var buildDir = 'www-built';
 
-        d.resolve(v.spawn('node', ['tools/r.js', '-o', 'tools/build.js'], {
+        //Remove the old dir
+        v.rm(buildDir);
+
+        v.spawn('node', ['tools/r.js', '-o', 'tools/build.js'], {
           useConsole: !namedArgs.quiet
-        }));
+        }).then(function() {
+          var indexName = buildDir + '/index.html';
+          var contents = v.read(indexName);
+          var scriptRegExp = /(<script[^>]+data-main=")([^"]+)("[^>]+src="[^"]+"><\/script>)/;
+
+          contents = contents.replace(scriptRegExp,
+            function (match, pre, script, post) {
+              return pre + 'js/app-cdn' + post;
+            });
+
+          v.write(indexName, contents);
+          d.resolve("Done!");
+        });
       }
     },
 
