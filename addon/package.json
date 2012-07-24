@@ -1,0 +1,16 @@
+{
+    "name": "australis-customization", 
+    "license": "MPL 2.0", 
+    "author": "", 
+    "version": "0.5", 
+    "fullName": "australis-customization", 
+    "id": "jid1-JP21ittUYJBuSw", 
+    "description": "a basic add-on",
+    "preferences": [{
+        "name": "prototypeUrl",
+        "title": "The Prototype Url.",
+        "description": "The url to the prototype, duh.",
+        "type": "string",
+        "value": "http://people.mozilla.com/~bwinton/australis/customization/%OS%/"
+    }]
+}

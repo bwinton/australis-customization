@@ -1,1 +1,3 @@
 .DS_Store
+addon/*.xpi
+addon/update.rdf
