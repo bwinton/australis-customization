@@ -1,4 +1,4 @@
-define(["jquery", "x-tag"], function ($, tag) {
+define(["jquery", "x-tag"], function ($, xtag) {
 
   xtag.register("toolbar-item", {
     onCreate: function(){
