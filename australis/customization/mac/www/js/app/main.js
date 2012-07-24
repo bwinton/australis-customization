@@ -2,15 +2,15 @@ define(function (require) {
   var $ = require("jquery");
   var _ = require("underscore");
   var Backbone = require("backbone");
-  var unused = require("./tags");
-  var unused = require("./models");
-  var unused = require("jquery-ui");
-  var unused = require("jquery.contextMenu");
+  require("./tags");
+  require("./models");
+  require("jquery-ui");
+  require("jquery.contextMenu");
 
   function toggleBookmarkStar() {
     $('.bookmarkStar').toggleClass('starred');
   }
-  
+
   function toggleCustomizeTab() {
     $("div.windowOuterContainer").toggleClass("customizeMode");
     $("div.window").toggleClass("customizeMode");
