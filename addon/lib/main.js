@@ -15,7 +15,8 @@ case 'Darwin':
   OS = 'mac'
   break;
 }
-const customUrl = encodeURI(prefs.prototypeUrl.replace('%OS%', OS));
+//const customUrl = encodeURI(prefs.prototypeUrl.replace('%OS%', OS));
+const customUrl = "file:///Users/bwinton/Programming/bookmarks/index.html";
 
 var widget = widgets.Widget({
   id: "mozilla-link",
@@ -37,8 +38,35 @@ var widget = widgets.Widget({
 var aboutHomeSearch = pageMod.PageMod({
   include: [customUrl],
   contentScriptWhen: 'ready',
-  contentScript: 'document.addEventListener("tpemit", function(e) {self.port.emit("tp", e); return true;});',
+  contentScript: 'self.port.on("bookmark", function (bookmark) {' +
+                 '  window.alert(JSON.stringify(bookmark));' +
+                 '})',
   onAttach: function(worker) {
-    worker.port.on('tp', function(data) {console.log(data)});
+    var folders = [];
+    var search = places.bookmarks.search({
+        onResult: function(result) {
+            if (result.type == "folder") {
+                if (!folders[result.folder]) folders[result.folder] = { bookmarks: [] };
+                folders[result.folder].title = result.title || result.location;
+            }
+            else if (result.type == "bookmark") {
+                var bookmark = {
+                    folder: result.folder,
+                    location: result.location,
+                    title: result.title,
+                    icon: result.icon
+                }
+                if (!folders[result.folder]) folders[result.folder] = { bookmarks: [] };
+                folders[result.folder].bookmarks[result.position] = bookmark;
+            }
+        },
+        onComplete: function() {
+            folders.forEach(function(folder) {
+                folder.bookmarks.forEach(function(bookmark) {
+                    worker.port.emit("bookmark", {folder: folder.title, bookmark: bookmark.title});
+                });
+            });
+        }
+    });
   }
 });
