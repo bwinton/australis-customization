@@ -23,6 +23,12 @@ define(["jquery", "underscore", "backbone"], function($, _, Backbone) {
   });
 
   var ButtonView = Backbone.View.extend({
+    spacerTmpl: (
+      "<div class='menuPanelButton spacer' title='Drop buttons here!'>" +
+      "  <div class='menuPanelButtonHighlight'></div>" +
+      "</div>"),
+
+
     buttonTmpl: _.template(
       "<div class='menuPanelButton <%= type %>'" +
       "     title='<%= description %>  (<%= shortcut %>)'>" +
@@ -69,10 +75,7 @@ define(["jquery", "underscore", "backbone"], function($, _, Backbone) {
       // Now add a row of spacers.
       $el.append("<div class='panelToolbarIconsRow'>");
       for (var i = 0; i < 3; i++) {
-        $el.children(":last-child").append(
-          "<div class='menuPanelButton spacer' title='Drop buttons here!'>" +
-          "  <div class='menuPanelButtonHighlight'></div>" +
-          "</div>");
+        $el.children(":last-child").append(self.spacerTmpl);
       };
     }
   });
@@ -155,5 +158,8 @@ define(["jquery", "underscore", "backbone"], function($, _, Backbone) {
       "<%= label %></toolbar-item>")
   });
   customizePanel.render();
+
+  return {menuPanel: menuPanel,
+          customizePanel: customizePanel}
 
 });

@@ -2,8 +2,8 @@ define(function (require) {
   var $ = require("jquery");
   var _ = require("underscore");
   var Backbone = require("backbone");
+  var models = require("./models");
   require("./tags");
-  require("./models");
   require("jquery-ui");
   require("jquery.contextMenu");
 
@@ -85,7 +85,7 @@ define(function (require) {
       revert: "invalid",
     });
 
-    $('.menuPanelButton.spacer').droppable({
+    const spacerDropOpts = {
       accept: '.menuPanelButton',
       hoverClass: 'hovered',
       drop: function handleDropEvent( event, ui ) {
@@ -94,14 +94,20 @@ define(function (require) {
         draggable.css({top:"", left:""});
         $(this).remove();
       }
-    });
+    };
+
+    $('.menuPanelButton.spacer').droppable(spacerDropOpts);
 
     $('x-tabpanels').droppable({
       accept: '.menuPanelButton',
       hoverClass: 'hovered',
       drop: function handleDropEvent( event, ui ) {
         var draggable = ui.draggable;
-        // draggable.offset($(this).offset());
+        var target = $(this).find(".customizeToolsArea > .panelToolbarIconsRow").last();
+        $(models.customizePanel.spacerTmpl).insertAfter(draggable)
+          .droppable(spacerDropOpts).show();
+        draggable.appendTo(target);
+        draggable.css({top:"", left:""});
       }
     });
 
