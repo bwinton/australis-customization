@@ -81,8 +81,28 @@ define(function (require) {
       disabled: true,
       containment: '.windowOuterContainer',
       snap: '.customizeToolbarItem-placeholder',
-      grid: [ 85, 72 ],
+      snapMode: "inner",
       revert: "invalid",
+    });
+
+    $('.menuPanelButton.spacer').droppable({
+      accept: '.menuPanelButton',
+      hoverClass: 'hovered',
+      drop: function handleDropEvent( event, ui ) {
+        var draggable = ui.draggable;
+        draggable.insertAfter($(this));
+        draggable.css({top:"", left:""});
+        $(this).remove();
+      }
+    });
+
+    $('x-tabpanels').droppable({
+      accept: '.menuPanelButton',
+      hoverClass: 'hovered',
+      drop: function handleDropEvent( event, ui ) {
+        var draggable = ui.draggable;
+        // draggable.offset($(this).offset());
+      }
     });
 
     $("#arrowPanel").contextMenu({menu: "panelContext"}, function(a, el, pos) {

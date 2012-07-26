@@ -17,21 +17,21 @@ define(function (require) {
         //Remove the old dir
         v.rm(buildDir);
 
+        var indexName = buildDir + '/js/app.js';
+        var contents = v.read(indexName);
+        var pathsRegExp = /(paths:{)([^}]+)(})/;
+
+        contents = contents.replace(pathsRegExp,
+          function (match, pre, paths, post) {
+            return pre + JSON.stringify(buildOpts.paths) + post;
+          });
+
+        v.write(indexName, contents);
         v.spawn('node', ['tools/r.js', '-o', buildJs], {
           useConsole: !namedArgs.quiet
         }).then(function() {
           var buildOpts = JSON.parse(v.read(buildJs));
 
-          var indexName = buildDir + '/js/app.js';
-          var contents = v.read(indexName);
-          var pathsRegExp = /(paths:{)([^}]+)(})/;
-
-          contents = contents.replace(pathsRegExp,
-            function (match, pre, paths, post) {
-              return pre + JSON.stringify(buildOpts.paths) + post;
-            });
-
-          v.write(indexName, contents);
           d.resolve("Done!");
         });
       }
