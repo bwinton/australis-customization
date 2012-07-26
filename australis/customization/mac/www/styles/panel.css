@@ -137,23 +137,23 @@
   white-space: nowrap;
 }
 
+.spacer {
+  border: 1px dashed hsla(210,54%,20%,.2);
+  border-color: hsla(210,54%,20%,.13) hsla(210,54%,20%,.16) hsla(210,54%,20%,.2);
+  border-radius: 3px;
+}
+
 .menuPanelButton.spacer {
   display: none;
   width: 60px;
   height: 42px;
   margin: 6px;
-  border: 1px dashed hsla(210,54%,20%,.2);
-  border-color: hsla(210,54%,20%,.13) hsla(210,54%,20%,.16) hsla(210,54%,20%,.2);
-  border-radius: 3px;
 }
 
 .panelSectionEditContainer.spacer {
   display: none;
   width: 231px;
   height: 22px;
-  border: 1px dashed hsla(210,54%,20%,.2);
-  border-color: hsla(210,54%,20%,.13) hsla(210,54%,20%,.16) hsla(210,54%,20%,.2);
-  border-radius: 3px;
 }
 
 /*Panel Edit Buttons*/

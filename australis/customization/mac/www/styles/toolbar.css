@@ -271,6 +271,15 @@
   background-image: url(../images/reloadStopGo-reload-hoverActive.png);
 }
 
+.navBar > .spacer {
+  display: none;
+  min-width: 500px;
+  -moz-box-flex: 0.3;
+  margin: 8px 6px 8px 0;
+  max-height: 26px;
+}
+
+
 .toolbarButton.bookmarkStar > .icon {
   background-image: url(../images/toolbarButton-bookmarkUnstarred.png);
   background-position: top left;
