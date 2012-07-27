@@ -86,6 +86,11 @@ define(function (require) {
     $('.bookmarkStar').click(toggleBookmarkStar);
     $('#customize').click(enterCustomizeMode);
     $('#done').click(leaveCustomizeMode);
+    $('html').keypress(function(event) {
+      if (event.keyCode === 27)
+        leaveCustomizeMode();
+    });
+
     $('#restore').click(function() {
       models.customizePanel.render();
       models.menuPanel.render();
