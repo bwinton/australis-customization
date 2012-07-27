@@ -26,7 +26,6 @@ define(["jquery", "underscore", "backbone", "jquery-ui"], function($, _, Backbon
     buttonTmpl: _.template(
       "<div class='menuPanelButton <%= type %>'" +
       "     title='<%= description %>  (<%= shortcut %>)'>" +
-      "  <div class='menuPanelButtonHighlight'></div>" +
       "  <div style='background-image: url(\"images/button-<%= type %>.png\")'" +
       "       class='button'></div>" +
       "  <div class='label'><%= label %></div>" +
@@ -41,9 +40,7 @@ define(["jquery", "underscore", "backbone", "jquery-ui"], function($, _, Backbon
     },
 
     spacerTmpl: (
-      "<div class='menuPanelButton spacer' title='Drop buttons here!'>" +
-      "  <div class='menuPanelButtonHighlight'></div>" +
-      "</div>"),
+      "<div class='menuPanelButton spacer' title='Drop buttons here!'></div>"),
 
     spacerDropOpts: {
       accept: '.menuPanelButton',

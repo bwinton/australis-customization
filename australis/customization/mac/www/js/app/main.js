@@ -36,11 +36,7 @@ define(function (require) {
     $(".menuPanelButton").disableContextMenu();
     $(".menuPanelButton").draggable("enable");
     setTimeout(function() {
-      $(".spacer").slideDown("fast", function() {
-        $(".menuPanelButtonHighlight").effect("pulsate", { times:3 }, 1000, function() {
-          $(".menuPanelButtonHighlight").hide("fade", {}, 1500);
-        });
-      });
+      $(".spacer").slideDown("fast");
     }, 100);
   };
 

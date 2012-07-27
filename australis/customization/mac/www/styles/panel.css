@@ -88,14 +88,6 @@
   -moz-transition-timing-function: ease;
 }
 
-.menuPanelButtonHighlight {
-  position: absolute;
-  width: 68px;
-  height: 42px;
-  background: -moz-radial-gradient(circle closest-side, hsla(204,73%,70%,.8), hsla(204,73%,70%,0));
-  display: none;
-}
-
 .menuPanelButton:hover {
   background-color: hsla(210,48%,90%,.1);
   background-image: -moz-linear-gradient(hsla(0,0%,100%,.8), hsla(0,0%,100%,.1));
