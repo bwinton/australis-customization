@@ -65,10 +65,8 @@ define(["jquery", "underscore", "backbone"], function($, _, Backbone) {
       // Empty element
       $el.html("");
 
+      $el.append("<div class='panelToolbarIconsRow'>");
       this.collection.each(function(model, i) {
-        if (i % 3 == 0) {
-          $el.append("<div class='panelToolbarIconsRow'>");
-        }
         $el.children(":last-child").append(self.buttonTmpl(model.toJSON()));
       });
 

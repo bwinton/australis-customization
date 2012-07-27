@@ -33,6 +33,7 @@
   margin-top: -8px;
   padding: 0;
   height: 400px;
+  width: 262px;
   border-width: 7px 9px 11px 9px;
   border-style: solid;
   -moz-border-image: url(../images/panel-borderImage.png) 7 9 11 9 fill repeat;

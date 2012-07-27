@@ -273,7 +273,7 @@
 
 .navBar > .spacer {
   display: none;
-  min-width: 500px;
+  min-width: 250px;
   -moz-box-flex: 0.3;
   margin: 8px 6px 8px 0;
   max-height: 26px;
