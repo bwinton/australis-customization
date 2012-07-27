@@ -73,11 +73,13 @@ define(["jquery", "underscore", "backbone", "jquery-ui"], function($, _, Backbon
           .draggable(self.buttonDragOpts)
           .mousedown(function(event) {
             if ($(".window.customizeMode").length)
-              $(this).addClass("mousedown");
+              $(this).add(".spacer").addClass("mousedown");
           })
           .mouseup(function(event) {
-            if ($(".window.customizeMode").length)
-              $(this).removeClass("mousedown");
+            $(this).add(".spacer").removeClass("mousedown");
+          })
+          .bind("dragstop", function(event, ui) {
+            $(this).add(".spacer").removeClass("mousedown");
           });
       });
 
