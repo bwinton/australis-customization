@@ -9,45 +9,56 @@ define(function (require) {
 
   function toggleBookmarkStar() {
     $('.bookmarkStar').toggleClass('starred');
-  }
+  };
 
   function toggleCustomizeTab() {
+    var button = $("div.menuButton");
     $("div.windowOuterContainer").toggleClass("customizeMode");
     $("div.window").toggleClass("customizeMode");
     $("div.backButton").toggleClass("customizeMode");
     $("div.locationBar").toggleClass("customizeMode");
-    var button = $("div.menuButton");
+    button.attr("custom", !button.hasClass("customizeMode"));
     button.toggleClass("customizeMode");
-    if (button.hasClass("customizeMode")) {
-      // We're in customize mode!!!
-      button.attr("custom", true);
-      $("#menuPanel").appendTo($("div.customizeMenuArea"));
-      $("#menuPanel").css("z-index", 0);
-      toggleMenuPanel();
-      $("#customize").text("Done");
-      $("div.customizeContentContainer").css({"display":"-moz-box"});
-      $("div.customizeContentContainer").css({"display":"block"});
-      $(".menuPanelButton").disableContextMenu();
-      $(".menuPanelButton").draggable("enable");
-      setTimeout(function() {
-        $(".spacer").slideDown("fast", function() {
-          $(".menuPanelButtonHighlight").effect("pulsate", { times:3 }, 1000, function() {
-            $(".menuPanelButtonHighlight").hide("fade", {}, 1500);
-          });
+  };
+
+  function enterCustomizeMode() {
+    var button = $("div.menuButton");
+    if (button.hasClass("customizeMode"))
+      // We're in customize mode already!
+      return;
+
+    // We're in customize mode!!!
+    toggleCustomizeTab();
+    $("#menuPanel").appendTo($("div.customizeMenuArea"));
+    $("#menuPanel").css("z-index", 0);
+    toggleMenuPanel();
+    $("div.customizeContentContainer").css({"display":"block"});
+    $(".menuPanelButton").disableContextMenu();
+    $(".menuPanelButton").draggable("enable");
+    setTimeout(function() {
+      $(".spacer").slideDown("fast", function() {
+        $(".menuPanelButtonHighlight").effect("pulsate", { times:3 }, 1000, function() {
+          $(".menuPanelButtonHighlight").hide("fade", {}, 1500);
         });
-      }, 100);
-    } else {
-      button.attr("custom", false);
-      $(".spacer").slideUp("fast");
-      $(".menuPanelButton").draggable("disable");
-      $(".menuPanelButton").enableContextMenu();
-      $("#menuPanel").css("z-index", 9999);
-      $("#menuPanel").appendTo($("div.window"));
-      $("#customize").text("Customize");
-      $("div.customizeContentContainer").css({"display":"none"});
-      toggleMenuPanel();
-    }
-  }
+      });
+    }, 100);
+  };
+
+  function leaveCustomizeMode() {
+    var button = $("div.menuButton");
+    if (!button.hasClass("customizeMode"))
+      // We're out of customize mode already!
+      return;
+
+    toggleCustomizeTab();
+    $(".spacer").slideUp("fast");
+    $(".menuPanelButton").draggable("disable");
+    $(".menuPanelButton").enableContextMenu();
+    $("#menuPanel").css("z-index", 9999);
+    $("#menuPanel").appendTo($("div.window"));
+    $("div.customizeContentContainer").css({"display":"none"});
+    toggleMenuPanel();
+  };
 
   function toggleMenuPanel() {
     $('div.toolbarButton.customizeButton').toggleClass('toggled');
@@ -55,12 +66,9 @@ define(function (require) {
   }
 
   $(function() {
-    $(document).delegate('div.menuButton[custom!="true"]', 'click', function() {
-      var evt = document.createEvent('Event');
-      evt.initEvent('tpemit', true, true);
-      document.body.dispatchEvent(evt);
-
-      toggleMenuPanel();
+    $('div.menuButton').click(function() {
+      if($(this).attr("custom") !== "true")
+        toggleMenuPanel();
     });
 
     if (window.location.search == "?scroll") {
@@ -74,7 +82,8 @@ define(function (require) {
       }, 50);
     }
 
-    $('#customize').click(toggleCustomizeTab);
+    $('#customize').click(enterCustomizeMode);
+    $('#done').click(leaveCustomizeMode);
     $('.bookmarkStar').click(toggleBookmarkStar);
 
     $(".menuPanelButton").draggable({
@@ -114,7 +123,7 @@ define(function (require) {
     $("#arrowPanel").contextMenu({menu: "panelContext"}, function(a, el, pos) {
       switch (a) {
       case "addMore":
-        toggleCustomizeTab();
+        enterCustomizeMode();
         break;
       default:
         alert(
@@ -129,7 +138,7 @@ define(function (require) {
     $(".menuPanelButton").contextMenu({menu: "buttonContext"}, function(a, el, pos) {
       switch (a) {
       case "customize":
-        toggleCustomizeTab();
+        enterCustomizeMode();
         break;
       default:
         alert(

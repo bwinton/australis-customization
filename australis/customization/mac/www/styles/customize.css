@@ -30,6 +30,19 @@
   border-top: 1px solid hsla(0,0%,0%,.1);
 }
 
+.customizeGlobalFooter {
+  position: absolute;
+  bottom: 93px;
+  right: 82px;
+}
+
+#restore {
+}
+
+#done {
+  font-weight: bold;
+}
+
 .window.customizeMode .ui-draggable {
   cursor: -moz-grab;
 }
