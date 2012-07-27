@@ -70,7 +70,15 @@ define(["jquery", "underscore", "backbone", "jquery-ui"], function($, _, Backbon
       this.collection.each(function(model, i) {
         $(self.buttonTmpl(model.toJSON()))
           .appendTo($el.children(":last-child"))
-          .draggable(self.buttonDragOpts);
+          .draggable(self.buttonDragOpts)
+          .mousedown(function(event) {
+            if ($(".window.customizeMode").length)
+              $(this).addClass("mousedown");
+          })
+          .mouseup(function(event) {
+            if ($(".window.customizeMode").length)
+              $(this).removeClass("mousedown");
+          });
       });
 
       this.renderFooter($el);
