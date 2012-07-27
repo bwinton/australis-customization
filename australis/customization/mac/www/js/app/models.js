@@ -1,4 +1,4 @@
-define(["jquery", "underscore", "backbone"], function($, _, Backbone) {
+define(["jquery", "underscore", "backbone", "jquery-ui"], function($, _, Backbone) {
 
   var Button = Backbone.Model.extend({
     defaults: function() {
@@ -23,12 +23,6 @@ define(["jquery", "underscore", "backbone"], function($, _, Backbone) {
   });
 
   var ButtonView = Backbone.View.extend({
-    spacerTmpl: (
-      "<div class='menuPanelButton spacer' title='Drop buttons here!'>" +
-      "  <div class='menuPanelButtonHighlight'></div>" +
-      "</div>"),
-
-
     buttonTmpl: _.template(
       "<div class='menuPanelButton <%= type %>'" +
       "     title='<%= description %>  (<%= shortcut %>)'>" +
@@ -38,26 +32,33 @@ define(["jquery", "underscore", "backbone"], function($, _, Backbone) {
       "  <div class='label'><%= label %></div>" +
       "</div>"),
 
-    initialize: function (options) {
-      this.collection.bind('add', this.addOne, this)
-                     .bind('remove', this.removeOne, this)
-                     .bind('reset', this.render, this);
-    },
-    addOne: function (model) {
-      $('<li id="' + model.cid + '" class="item"><span class="title">' + model.get('title') + '</span></li>')
-        .hide()
-        .appendTo(this.el)
-        .slideDown(300);
+    buttonDragOpts: {
+      disabled: true,
+      containment: '.windowOuterContainer',
+      snap: '.customizeToolbarItem-placeholder',
+      snapMode: "inner",
+      revert: "invalid",
     },
 
-    removeOne: function (model) {
-      this.$('#' + model.cid).slideUp(300, function () {
+    spacerTmpl: (
+      "<div class='menuPanelButton spacer' title='Drop buttons here!'>" +
+      "  <div class='menuPanelButtonHighlight'></div>" +
+      "</div>"),
+
+    spacerDropOpts: {
+      accept: '.menuPanelButton',
+      hoverClass: 'hovered',
+      drop: function handleDropEvent( event, ui ) {
+        var draggable = ui.draggable;
+        draggable.insertAfter($(this));
+        draggable.css({top:"", left:""});
         $(this).remove();
-      });
+      }
     },
-  });
 
-  var MenuPanel = ButtonView.extend({
+    renderHeader: function($el) {},
+    renderFooter: function($el) {},
+
     render: function () {
       var self = this;
       var $el = $(this.el);
@@ -65,14 +66,27 @@ define(["jquery", "underscore", "backbone"], function($, _, Backbone) {
       // Empty element
       $el.html("");
 
+      this.renderHeader($el);
+
       $el.append("<div class='panelToolbarIconsRow'>");
+
       this.collection.each(function(model, i) {
-        $el.children(":last-child").append(self.buttonTmpl(model.toJSON()));
+        $(self.buttonTmpl(model.toJSON()))
+          .appendTo($el.children(":last-child"))
+          .draggable(self.buttonDragOpts);
       });
 
+      this.renderFooter($el);
+    },
+  });
+
+  var MenuPanel = ButtonView.extend({
+    renderFooter: function($el) {
       // Now add a row of spacers.
       for (var i = 0; i < 3; i++) {
-        $el.children(":last-child").append(self.spacerTmpl);
+        $(this.spacerTmpl)
+          .appendTo($el.children(":last-child"))
+          .droppable(this.spacerDropOpts);
       };
     }
   });
@@ -104,25 +118,20 @@ define(["jquery", "underscore", "backbone"], function($, _, Backbone) {
 
   var CustomizePanel = ButtonView.extend({
 
-    render: function () {
-      var self = this;
-      var $el = $(this.el);
+    renderHeader: function ($el) {
+      $el.append('<div class="customizeCategoryHeader">' +
+                   'More Tools to add to the Menu and Toolbar' +
+                 '</div>');
+    },
 
-      // Empty element
-      $el.children("toolbar-item").remove;
-
-      $el.append("<div class='panelToolbarIconsRow'>");
-      this.collection.each(function(model, i) {
-        $el.children(":last-child").append(self.buttonTmpl(model.toJSON()));
-      });
-
+    renderFooter: function($el) {
       // Now add the footer.
       $el.append("<div class='customizeFooter'></div>");
     }
   });
 
   var customizePanel = new CustomizePanel({
-    el: $('x-tabpanels'),
+    el: $('.customizeToolsArea'),
     collection: new ButtonList([
       { type: "share", description: "Share this item",
         shortcut: "F1", label: "Share" },
@@ -147,9 +156,6 @@ define(["jquery", "underscore", "backbone"], function($, _, Backbone) {
       { type: "encoding", description: "Choose your character encoding",
         shortcut: "Ctrl-Shift-?", label: "Encoding" }
       ]),
-    buttonTmpl: _.template("<toolbar-item type='<%= type %>' " +
-      "description='<%= description %>' shortcut='<%= shortcut %>'>" +
-      "<%= label %></toolbar-item>")
   });
   customizePanel.render();
 

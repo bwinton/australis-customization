@@ -31,8 +31,8 @@ define(function (require) {
     toggleCustomizeTab();
     $("#menuPanel").appendTo($("div.customizeMenuArea"));
     $("#menuPanel").css("z-index", 0);
-    toggleMenuPanel();
     $("div.customizeContentContainer").css({"display":"block"});
+    $("#arrowPanel").disableContextMenu();
     $(".menuPanelButton").disableContextMenu();
     $(".menuPanelButton").draggable("enable");
     setTimeout(function() {
@@ -54,6 +54,7 @@ define(function (require) {
     $(".spacer").slideUp("fast");
     $(".menuPanelButton").draggable("disable");
     $(".menuPanelButton").enableContextMenu();
+    $("#arrowPanel").enableContextMenu();
     $("#menuPanel").css("z-index", 9999);
     $("#menuPanel").appendTo($("div.window"));
     $("div.customizeContentContainer").css({"display":"none"});
@@ -82,30 +83,15 @@ define(function (require) {
       }, 50);
     }
 
+    $('.bookmarkStar').click(toggleBookmarkStar);
     $('#customize').click(enterCustomizeMode);
     $('#done').click(leaveCustomizeMode);
-    $('.bookmarkStar').click(toggleBookmarkStar);
-
-    $(".menuPanelButton").draggable({
-      disabled: true,
-      containment: '.windowOuterContainer',
-      snap: '.customizeToolbarItem-placeholder',
-      snapMode: "inner",
-      revert: "invalid",
+    $('#restore').click(function() {
+      models.customizePanel.render();
+      models.menuPanel.render();
+      $(".spacer").show();
+      $(".menuPanelButton").draggable("enable");
     });
-
-    const spacerDropOpts = {
-      accept: '.menuPanelButton',
-      hoverClass: 'hovered',
-      drop: function handleDropEvent( event, ui ) {
-        var draggable = ui.draggable;
-        draggable.insertAfter($(this));
-        draggable.css({top:"", left:""});
-        $(this).remove();
-      }
-    };
-
-    $('.menuPanelButton.spacer').droppable(spacerDropOpts);
 
     $('x-tabpanels').droppable({
       accept: '.menuPanelButton',
@@ -114,7 +100,7 @@ define(function (require) {
         var draggable = ui.draggable;
         var target = $(this).find(".customizeToolsArea > .panelToolbarIconsRow").last();
         $(models.customizePanel.spacerTmpl).insertAfter(draggable)
-          .droppable(spacerDropOpts).show();
+          .droppable(models.customizePanel.spacerDropOpts).show();
         draggable.appendTo(target);
         draggable.css({top:"", left:""});
       }
