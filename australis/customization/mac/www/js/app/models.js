@@ -71,7 +71,6 @@ define(["jquery", "underscore", "backbone"], function($, _, Backbone) {
       });
 
       // Now add a row of spacers.
-      $el.append("<div class='panelToolbarIconsRow'>");
       for (var i = 0; i < 3; i++) {
         $el.children(":last-child").append(self.spacerTmpl);
       };
@@ -112,21 +111,18 @@ define(["jquery", "underscore", "backbone"], function($, _, Backbone) {
       // Empty element
       $el.children("toolbar-item").remove;
 
+      $el.append("<div class='panelToolbarIconsRow'>");
       this.collection.each(function(model, i) {
-        if (i % 4 == 0) {
-          $el.append("<div class='panelToolbarIconsRow'>");
-        }
         $el.children(":last-child").append(self.buttonTmpl(model.toJSON()));
       });
 
       // Now add the footer.
       $el.append("<div class='customizeFooter'></div>");
-
     }
   });
 
   var customizePanel = new CustomizePanel({
-    el: $('.customizeToolsArea'),
+    el: $('x-tabpanels'),
     collection: new ButtonList([
       { type: "share", description: "Share this item",
         shortcut: "F1", label: "Share" },

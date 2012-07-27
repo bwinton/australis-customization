@@ -104,6 +104,7 @@ x-tabpanels {
   margin-left: -6px;
   min-height: 511px;
   min-width: 634px;
+  max-width: 634px;
 }
 
 .tabPanelArrowLeft {
@@ -140,7 +141,7 @@ x-tabbox[tab-orient="left"] x-tabs,
 x-tabbox[tab-orient="right"] x-tabs,
 x-tabbox[tab-orient="left"] x-tabpanels,
 x-tabbox[tab-orient="right"] x-tabpanels {
-  -moz-box-flex: 1;
+  -moz-box-flex: 0;
   -moz-box-orient: vertical;
 }
 
