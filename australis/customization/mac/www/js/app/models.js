@@ -42,15 +42,24 @@ define(["jquery", "underscore", "backbone", "jquery-ui"], function($, _, Backbon
     dropOpts: {
       accept: '.menuPanelButton',
       hoverClass: 'hovered',
-      drop: function handleDropEvent( event, ui ) {
+      drop: function handleDropEvent(event, ui) {
         var draggable = ui.draggable;
-        if ($(this).hasClass("spacer") ||
-            (draggable.offset().left < ($(this).offset().left + 5)))
-          draggable.insertBefore($(this));
-        else
-          draggable.insertAfter($(this));
-        draggable.css({top:"", left:""});
-        draggable.droppable(menuPanel.dropOpts);
+        var self = $(this);
+        function animatedInsert(before) {
+          var spacer = $("<div class='menuPanelButton'></div>");
+          spacer.css({width: "0px"});
+          if (before)
+            spacer.insertBefore(self);
+          else
+            spacer.insertAfter(self);
+          spacer.animate({width: self.width()+"px"}, 150, function() {
+            spacer.replaceWith(draggable);
+            draggable.css({top:"", left:""});
+            draggable.droppable(menuPanel.dropOpts);
+          });
+        }
+        animatedInsert($(this).hasClass("spacer") ||
+                       (draggable.offset().left < ($(this).offset().left + 5)));
       }
     },
 
