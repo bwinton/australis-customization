@@ -47,9 +47,8 @@ define(["jquery", "underscore", "backbone", "jquery-ui"], function($, _, Backbon
       hoverClass: 'hovered',
       drop: function handleDropEvent( event, ui ) {
         var draggable = ui.draggable;
-        draggable.insertAfter($(this));
+        draggable.insertBefore($(this));
         draggable.css({top:"", left:""});
-        $(this).remove();
       }
     },
 
@@ -89,12 +88,8 @@ define(["jquery", "underscore", "backbone", "jquery-ui"], function($, _, Backbon
 
   var MenuPanel = ButtonView.extend({
     renderFooter: function($el) {
-      // Now add a row of spacers.
-      for (var i = 0; i < 3; i++) {
-        $(this.spacerTmpl)
-          .appendTo($el.children(":last-child"))
-          .droppable(this.spacerDropOpts);
-      };
+      $(this.spacerTmpl).appendTo($el.children(":last-child"))
+                        .droppable(this.spacerDropOpts);
     }
   });
 
@@ -132,7 +127,6 @@ define(["jquery", "underscore", "backbone", "jquery-ui"], function($, _, Backbon
     },
 
     renderFooter: function($el) {
-      // Now add the footer.
       $el.append("<div class='customizeFooter'></div>");
     }
   });

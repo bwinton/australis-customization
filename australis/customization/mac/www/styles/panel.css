@@ -138,9 +138,20 @@
 
 .menuPanelButton.spacer {
   display: none;
-  width: 60px;
   height: 42px;
   margin: 6px;
+}
+
+.menuPanelButton.spacer:nth-child(3n) {
+  width: 60px;
+}
+
+.menuPanelButton.spacer:nth-child(3n+1) {
+  width: 235px;
+}
+
+.menuPanelButton.spacer:nth-child(3n+2) {
+  width: 149px;
 }
 
 .panelSectionEditContainer.spacer {

@@ -100,8 +100,6 @@ define(function (require) {
       drop: function handleDropEvent( event, ui ) {
         var draggable = ui.draggable;
         var target = $(this).find(".customizeToolsArea > .panelToolbarIconsRow").last();
-        $(models.customizePanel.spacerTmpl).insertAfter(draggable)
-          .droppable(models.customizePanel.spacerDropOpts).show();
         draggable.appendTo(target);
         draggable.css({top:"", left:""});
       }
