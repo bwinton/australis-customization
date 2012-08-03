@@ -46,6 +46,7 @@ define(["jquery", "underscore", "backbone", "jquery-ui"], function($, _, Backbon
         var draggable = ui.draggable;
         var self = $(this);
         function animatedInsert(before) {
+          var currentOffset = draggable.offset();
           var spacer = $("<div class='menuPanelButton'></div>");
           spacer.css({width: "0px"});
           if (before)
@@ -54,7 +55,8 @@ define(["jquery", "underscore", "backbone", "jquery-ui"], function($, _, Backbon
             spacer.insertAfter(self);
           spacer.animate({width: self.width()+"px"}, 150, function() {
             spacer.replaceWith(draggable);
-            draggable.css({top:"", left:""});
+            draggable.offset(currentOffset);
+            draggable.animate({top:"", left:""});
             draggable.droppable(menuPanel.dropOpts);
           });
         }
