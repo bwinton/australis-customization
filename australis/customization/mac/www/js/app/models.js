@@ -44,7 +44,11 @@ define(["jquery", "underscore", "backbone", "jquery-ui"], function($, _, Backbon
       hoverClass: 'hovered',
       drop: function handleDropEvent( event, ui ) {
         var draggable = ui.draggable;
-        draggable.insertBefore($(this));
+        if ($(this).hasClass("spacer") ||
+            (draggable.offset().left < ($(this).offset().left + 5)))
+          draggable.insertBefore($(this));
+        else
+          draggable.insertAfter($(this));
         draggable.css({top:"", left:""});
         draggable.droppable(menuPanel.dropOpts);
       }
