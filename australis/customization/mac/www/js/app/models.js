@@ -31,7 +31,7 @@ define(["jquery", "underscore", "backbone", "jquery-ui"], function($, _, Backbon
       "  <div class='label'><%= label %></div>" +
       "</div>"),
 
-    buttonDragOpts: {
+    dragOpts: {
       disabled: true,
       containment: '.windowOuterContainer',
       snap: '.customizeToolbarItem-placeholder',
@@ -39,16 +39,14 @@ define(["jquery", "underscore", "backbone", "jquery-ui"], function($, _, Backbon
       revert: "invalid",
     },
 
-    spacerTmpl: (
-      "<div class='menuPanelButton spacer' title='Drop buttons here!'></div>"),
-
-    spacerDropOpts: {
+    dropOpts: {
       accept: '.menuPanelButton',
       hoverClass: 'hovered',
       drop: function handleDropEvent( event, ui ) {
         var draggable = ui.draggable;
         draggable.insertBefore($(this));
         draggable.css({top:"", left:""});
+        draggable.droppable(menuPanel.dropOpts);
       }
     },
 
@@ -69,7 +67,7 @@ define(["jquery", "underscore", "backbone", "jquery-ui"], function($, _, Backbon
       this.collection.each(function(model, i) {
         $(self.buttonTmpl(model.toJSON()))
           .appendTo($el.children(":last-child"))
-          .draggable(self.buttonDragOpts)
+          .draggable(self.dragOpts)
           .mousedown(function(event) {
             if ($(".window.customizeMode").length)
               $(this).add(".spacer").addClass("mousedown");
@@ -88,8 +86,9 @@ define(["jquery", "underscore", "backbone", "jquery-ui"], function($, _, Backbon
 
   var MenuPanel = ButtonView.extend({
     renderFooter: function($el) {
-      $(this.spacerTmpl).appendTo($el.children(":last-child"))
-                        .droppable(this.spacerDropOpts);
+      $("<div class='menuPanelButton spacer' title='Drop buttons here!'></div>")
+        .appendTo($el.children(":last-child"));
+      $(".menuPanelButton").droppable(this.dropOpts);
     }
   });
 
