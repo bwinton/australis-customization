@@ -37,6 +37,13 @@ define(["jquery", "underscore", "backbone", "jquery-ui"], function($, _, Backbon
       snap: '.customizeToolbarItem-placeholder',
       snapMode: "inner",
       revert: "invalid",
+      helper: "clone",
+      start: function handleDragStart(event, ui) {
+        var draggable = $(event.target);
+        var cursorAt = draggable.draggable("option", "cursorAt");
+        draggable.css("opacity", "0");
+        draggable.animate({width: "0px", margin: "0px", padding: "0px"}, 1500);
+      },
     },
 
     dropOpts: {
