@@ -63,8 +63,16 @@
   transform: scale(1.1);
 }
 
+
+.customizeToolsArea .spacer {
+  display: none !important
+}
+
+x-tabpanel > *:first-child {
+    min-height: 477px;
+}
+
 .window.customizeMode .spacer {
-  cursor: -moz-grab;
   -moz-transition: -moz-transform 0.5s ease-in-out 100ms,
                    background-color 10ms linear 0ms,
                    border-color 10ms linear 0ms,
@@ -142,7 +150,6 @@ x-tabpanels {
   margin: 5px;
   margin-top: 14px;
   margin-left: -6px;
-  min-height: 511px;
   min-width: 634px;
   max-width: 634px;
 }
