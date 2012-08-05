@@ -94,18 +94,10 @@ define(function (require) {
       $(".menuPanelButton").draggable("enable");
     });
 
-    $('x-tabpanels').droppable({
-      accept: '.menuPanelButton',
-      hoverClass: 'hovered',
-      drop: function handleDropEvent( event, ui ) {
-        var draggable = ui.draggable;
-        var target = $(this).find(".customizeToolsArea > .panelToolbarIconsRow").last();
-        draggable.appendTo(target);
-        draggable.css({top:"", left:""});
-      }
-    });
+    $('.customizeToolsArea').droppable(models.customizePanel.dropOpts);
 
-    $("#arrowPanel").contextMenu({menu: "panelContext"}, function(a, el, pos) {
+    $("#arrowPanel").droppable(models.menuPanel.dropOpts)
+      .contextMenu({menu: "panelContext"}, function(a, el, pos) {
       switch (a) {
       case "addMore":
         enterCustomizeMode();
