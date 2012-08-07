@@ -63,6 +63,7 @@ define(function (require) {
   }
 
   $(function() {
+    models.render();
     $('div.menuButton').click(function() {
       if($(this).attr("custom") !== "true")
         toggleMenuPanel();
@@ -88,8 +89,7 @@ define(function (require) {
     });
 
     $('#restore').click(function() {
-      models.customizePanel.render();
-      models.menuPanel.render();
+      models.render();
       $(".spacer").show();
       $(".panelToolbarIconsRow").sortable("enable");
     });

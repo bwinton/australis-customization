@@ -85,14 +85,11 @@ define(["jquery", "underscore", "backbone", "jquery-ui"], function($, _, Backbon
 
       this.renderHeader($el);
 
-      $("<div class='panelToolbarIconsRow'></div>").appendTo($el)
-        .sortable({disabled: true});
-
+      $("<div class='panelToolbarIconsRow'></div>").appendTo($el);
 
       this.collection.each(function(model, i) {
         $(self.buttonTmpl(model.toJSON()))
           .appendTo($el.children(":last-child"))
-          //.draggable(self.dragOpts)
           .mousedown(function(event) {
             if ($(".window.customizeMode").length)
               $(this).add(".spacer").addClass("mousedown");
@@ -139,7 +136,6 @@ define(["jquery", "underscore", "backbone", "jquery-ui"], function($, _, Backbon
         shortcut: "Ctrl+Shift+A", label: "Add-ons" }
       ])
   });
-  menuPanel.render();
 
   var CustomizePanel = ButtonView.extend({
 
@@ -181,9 +177,21 @@ define(["jquery", "underscore", "backbone", "jquery-ui"], function($, _, Backbon
         shortcut: "Ctrl-Shift-?", label: "Encoding" }
       ]),
   });
-  customizePanel.render();
+
+  function render() {
+    menuPanel.render();
+    customizePanel.render();
+    $(".panelToolbarIconsRow").sortable({
+      disabled: true,
+      connectWith: ".panelToolbarIconsRow",
+    });
+    $(".ui-sortable").each(function(i,e){
+      alert($(e).sortable( "option", "connectWith" ));
+    });
+  };
 
   return {menuPanel: menuPanel,
-          customizePanel: customizePanel}
+          customizePanel: customizePanel,
+          render: render}
 
 });
