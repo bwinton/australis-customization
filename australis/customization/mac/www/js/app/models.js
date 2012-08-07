@@ -34,41 +34,42 @@ define(["jquery", "underscore", "backbone", "jquery-ui"], function($, _, Backbon
     dragOpts: {
       disabled: true,
       containment: '.windowOuterContainer',
-      snap: '.customizeToolbarItem-placeholder',
-      snapMode: "inner",
       revert: "invalid",
-      helper: "clone",
+      /* helper: "clone", */
       start: function handleDragStart(event, ui) {
         var draggable = $(event.target);
-        var cursorAt = draggable.draggable("option", "cursorAt");
+        /*
         draggable.css("opacity", "0");
-        draggable.animate({width: "0px", margin: "0px", padding: "0px"}, 1500);
+        draggable.animate({width: "0px", margin: "0px", padding: "0px"}, 150);
+        */
+      },
+      drag: function handleDragEvent(event, ui) {
+        var drop = ui.helper.data("dropTarget");
+        if (drop) {
+          drop(event, ui);
+        }
       },
     },
 
     dropOpts: {
       accept: '.menuPanelButton',
-      hoverClass: 'hovered',
-      drop: function handleDropEvent(event, ui) {
-        var draggable = ui.draggable;
+      over: function handleDropOver(event, ui) {
         var self = $(this);
-        function animatedInsert(before) {
-          var currentOffset = draggable.offset();
-          var spacer = $("<div class='menuPanelButton'></div>");
-          spacer.css({width: "0px"});
-          if (before)
-            spacer.insertBefore(self);
-          else
-            spacer.insertAfter(self);
-          spacer.animate({width: self.width()+"px"}, 150, function() {
-            spacer.replaceWith(draggable);
-            draggable.offset(currentOffset);
-            draggable.animate({top:"", left:""});
-            draggable.droppable(menuPanel.dropOpts);
+        ui.helper.data("dropTarget", function handleDropDrag(event, ui) {
+          var closest = JSON.stringify(ui.helper.offset()) + ", ";
+          // Loop through those, to see which one gets closest to ui.helper.offset()
+          self.find(".menuPanelButton").each(function(i, e) {
+            closest += JSON.stringify($(this).offset()) + ", ";
           });
-        }
-        animatedInsert($(this).hasClass("spacer") ||
-                       (draggable.offset().left < ($(this).offset().left + 5)));
+          console.log(closest);
+        });
+      },
+      out: function handleDropOut(event, ui) {
+        ui.helper.data("dropTarget", null);
+      },
+      drop: function handleDropEvent(event, ui) {
+        ui.draggable.insertBefore($(this).find(".spacer").first())
+          .css({width:"", margin:"", padding:"", opacity:"", top: "", left: ""});
       }
     },
 
@@ -84,12 +85,14 @@ define(["jquery", "underscore", "backbone", "jquery-ui"], function($, _, Backbon
 
       this.renderHeader($el);
 
-      $el.append("<div class='panelToolbarIconsRow'>");
+      $("<div class='panelToolbarIconsRow'></div>").appendTo($el)
+        .sortable({disabled: true});
+
 
       this.collection.each(function(model, i) {
         $(self.buttonTmpl(model.toJSON()))
           .appendTo($el.children(":last-child"))
-          .draggable(self.dragOpts)
+          //.draggable(self.dragOpts)
           .mousedown(function(event) {
             if ($(".window.customizeMode").length)
               $(this).add(".spacer").addClass("mousedown");
@@ -102,16 +105,15 @@ define(["jquery", "underscore", "backbone", "jquery-ui"], function($, _, Backbon
           });
       });
 
+      $("<div class='menuPanelButton spacer' title='Drop buttons here!'></div>")
+        .appendTo($el.children(":last-child"));
+
       this.renderFooter($el);
+
     },
   });
 
   var MenuPanel = ButtonView.extend({
-    renderFooter: function($el) {
-      $("<div class='menuPanelButton spacer' title='Drop buttons here!'></div>")
-        .appendTo($el.children(":last-child"));
-      $(".menuPanelButton").droppable(this.dropOpts);
-    }
   });
 
   var menuPanel = new MenuPanel({

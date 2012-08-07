@@ -34,7 +34,7 @@ define(function (require) {
     $("div.customizeContentContainer").css({"display":"block"});
     $("#arrowPanel").disableContextMenu();
     $(".menuPanelButton").disableContextMenu();
-    $(".menuPanelButton").draggable("enable");
+    $(".panelToolbarIconsRow").sortable("enable");
     setTimeout(function() {
       $(".spacer").slideDown("fast");
     }, 100);
@@ -48,7 +48,7 @@ define(function (require) {
 
     toggleCustomizeTab();
     $(".spacer").slideUp("fast");
-    $(".menuPanelButton").draggable("disable");
+    $(".panelToolbarIconsRow").sortable("disable");
     $(".menuPanelButton").enableContextMenu();
     $("#arrowPanel").enableContextMenu();
     $("#menuPanel").css("z-index", 9999);
@@ -91,7 +91,7 @@ define(function (require) {
       models.customizePanel.render();
       models.menuPanel.render();
       $(".spacer").show();
-      $(".menuPanelButton").draggable("enable");
+      $(".panelToolbarIconsRow").sortable("enable");
     });
 
     $('.customizeToolsArea').droppable(models.customizePanel.dropOpts);
