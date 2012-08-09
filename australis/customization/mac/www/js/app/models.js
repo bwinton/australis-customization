@@ -179,14 +179,13 @@ define(["jquery", "underscore", "backbone", "jquery-ui"], function($, _, Backbon
   });
 
   function render() {
+    // toolbar.render();
     menuPanel.render();
     customizePanel.render();
     $(".panelToolbarIconsRow").sortable({
       disabled: true,
       connectWith: ".panelToolbarIconsRow",
-    });
-    $(".ui-sortable").each(function(i,e){
-      alert($(e).sortable( "option", "connectWith" ));
+      items: ".menuPanelButton",
     });
   };
 

@@ -44,7 +44,7 @@
   font-weight: bold;
 }
 
-.window.customizeMode .ui-draggable {
+.window.customizeMode .menuPanelButton {
   cursor: -moz-grab;
   -moz-transition: -moz-transform 0.5s ease-in-out 100ms,
                    background-color 10ms linear 0ms,
@@ -52,8 +52,7 @@
                    box-shadow 10ms linear 0ms;
 }
 
-.window.customizeMode .menuPanelButton.mousedown,
-.window.customizeMode .ui-draggable.ui-draggable-dragging {
+.window.customizeMode .menuPanelButton.mousedown {
   cursor: -moz-grabbing;
   border-color: #8acbf9 #7bbdea #6db0de;
   opacity: 0.8;
