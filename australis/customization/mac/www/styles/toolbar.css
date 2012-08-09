@@ -13,6 +13,29 @@
   z-index: 599;
 }
 
+.navBar .panelToolbarIconsRow {
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+}
+
+.navBar .menuPanelButton {
+  /* width: 16px; */
+  display: -moz-box;
+  padding: 3px 7px;
+  margin: 8px 2px 8px 0px;
+  width: auto;
+}
+
+.navBar .menuPanelButton > .button {
+  margin: 0px;
+  width: 16px;
+  height: 16px;
+}
+
+.navBar .menuPanelButton > .label {
+  display: none;
+}
+
 .window.customizeMode .navBar {
   background-image: none;
   border-bottom: none;
@@ -271,7 +294,7 @@
   background-image: url(../images/reloadStopGo-reload-hoverActive.png);
 }
 
-.navBar > .spacer {
+.navBar .spacer {
   display: none;
   min-width: 250px;
   -moz-box-flex: 0.3;

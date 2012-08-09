@@ -36,7 +36,9 @@ define(function (require) {
     $(".menuPanelButton").disableContextMenu();
     $(".panelToolbarIconsRow").sortable("enable");
     setTimeout(function() {
-      $(".spacer").slideDown("fast");
+      $(".spacer").slideDown("fast", function() {
+        $(".navBar .spacer").css("display", "-moz-box");
+      });
     }, 100);
   };
 
