@@ -11,6 +11,10 @@
   background-image: url(images-general/background-noise-toolbar.png);
 }
 
+.customizeToolsArea {
+  display: -moz-box;
+  -moz-box-orient: vertical;
+}
 
 .customizeCategoryHeader {
   padding-bottom: 12px;
@@ -20,13 +24,13 @@
   line-height: 14px;
 }
 
-.customizeFooter {
-  position: absolute;
-  width: 700px;
-  height: 52px;
-  top: 600px;
-  left: 250px;
+.customizeToolsArea .panelToolbarIconsRow {
+  -moz-box-flex: 1;
+}
 
+.customizeFooter {
+  height: 52px;
+  margin: 0px -15px -15px -15px;
   background-color: hsla(0,0%,0%,.05);
   border-top: 1px solid hsla(0,0%,0%,.1);
 }

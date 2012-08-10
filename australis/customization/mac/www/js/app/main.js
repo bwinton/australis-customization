@@ -96,9 +96,10 @@ define(function (require) {
       $(".panelToolbarIconsRow").sortable("enable");
     });
 
-    $('.customizeToolsArea').droppable(models.customizePanel.dropOpts);
+    // $('.customizeToolsArea').droppable(models.customizePanel.dropOpts);
 
-    $("#arrowPanel").droppable(models.menuPanel.dropOpts)
+//    $("#arrowPanel").droppable(models.menuPanel.dropOpts)
+    $("#arrowPanel")
       .contextMenu({menu: "panelContext"}, function(a, el, pos) {
       switch (a) {
       case "addMore":
