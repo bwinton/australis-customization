@@ -1,36 +1,49 @@
 define(["jquery", "underscore", "backbone", "jquery-ui"], function($, _, Backbone) {
 
+  // Base classes.
+
   var Button = Backbone.Model.extend({
-    defaults: function() {
-      return {
-        type: "error",
-        description: "Error button",
-        shortcut: "Cmd-Error",
-        label: "Error"
-      };
+    defaults: {
+      type: "error",
+      description: "Error button",
+      shortcut: "Cmd-Error",
+      label: "Error",
+      template: _.template(
+        "<div class='menuPanelButton <%= type %>'" +
+        "     title='<%= description %>  (<%= shortcut %>)'>" +
+        "  <div style='background-image: url(\"images/button-<%= type %>.png\")'" +
+        "       class='button'></div>" +
+        "  <div class='label'><%= label %></div>" +
+        "</div>"),
     },
-
-    initialize: function() {
-      if (!this.get("title")) {
-        this.set({"title": this.defaults.title});
-      }
-    },
-
   });
+
+  var Spacer = Button.extend({
+    defaults: {
+      template: _.template(
+        "<div class='spacer' title='Drop buttons here!'></div>"),
+    },
+  });
+
+  var SplitButton = Button.extend({
+    defaults: {
+      template: _.template(
+        "<div class='splitToolbarButton <%= type %>'" +
+        "     title='<%= description %>  (<%= shortcut %>)'>" +
+        "  <div class='toolbarButton bookmarkStar'><div class='icon'></div></div>" +
+        "  <div class='splitToolbarButtonSeparator'></div>" +
+        "  <div class='toolbarButton dropDown'><img src='images/toolbarButton-dropDown.png'></div>" +
+        "  <div class='label'><%= label %></div>" +
+        "</div>")
+    },
+  })
 
   var ButtonList = Backbone.Collection.extend({
-    model: Button
+    model: Button,
   });
 
-  var ButtonView = Backbone.View.extend({
-    buttonTmpl: _.template(
-      "<div class='menuPanelButton <%= type %>'" +
-      "     title='<%= description %>  (<%= shortcut %>)'>" +
-      "  <div style='background-image: url(\"images/button-<%= type %>.png\")'" +
-      "       class='button'></div>" +
-      "  <div class='label'><%= label %></div>" +
-      "</div>"),
 
+  var ButtonView = Backbone.View.extend({
     dragOpts: {
       disabled: true,
       containment: '.windowOuterContainer',
@@ -88,7 +101,7 @@ define(["jquery", "underscore", "backbone", "jquery-ui"], function($, _, Backbon
       $("<div class='panelToolbarIconsRow'></div>").appendTo($el);
 
       this.collection.each(function(model, i) {
-        $(self.buttonTmpl(model.toJSON()))
+        $(model.attributes.template(model.toJSON()))
           .appendTo($el.children(":last-child"))
           .mousedown(function(event) {
             if ($(".window.customizeMode").length)
@@ -102,18 +115,54 @@ define(["jquery", "underscore", "backbone", "jquery-ui"], function($, _, Backbon
           });
       });
 
-      $("<div class='menuPanelButton spacer' title='Drop buttons here!'></div>")
-        .appendTo($el.children(":last-child"));
-
       this.renderFooter($el);
 
     },
   });
 
-  var MenuPanel = ButtonView.extend({
+
+  // Subclasses.
+
+  var Toolbar = ButtonView.extend({
+
+    renderHeader: function ($el) {
+      $el.append(
+        '<div class="toolbarButton backButton">' +
+        '  <img src="images/toolbarButton-back.png">' +
+        '</div>' +
+        '<div class="locationBar" contentEditable="true">' +
+        '  <div class="locationBarLabel">' +
+        '    <span class="domainName">www.stephenhorlander.com</span>' +
+        '<span class="urlPath">/</span>' +
+        '  </div>' +
+        '  <div class="stopGoReload">' +
+        '    <div class="icon"></div>' +
+        '  </div>' +
+        '</div>');
+    },
+
+    renderFooter: function($el) {
+      $el.append(
+        '<div class="toolbarButtonSeparator"></div>' +
+        '<div class="toolbarButton menuButton">' +
+        '  <img src="images/toolbarButton-menu.png">' +
+        '</div>');
+    }
   });
 
-  var menuPanel = new MenuPanel({
+  var toolbar = new Toolbar({
+    el: $(".navBar"),
+    collection: new ButtonList([
+      new Spacer(),
+      new SplitButton({ type: "bookmark", description: "Bookmark this page",
+        shortcut: "Ctrl-D", label: "Bookmark" }),
+      { type: "download", description: "Downloads",
+        shortcut: "Ctrl-J", label: "Downloads" }
+      ])
+  })
+
+
+  var menuPanel = new ButtonView({
     el: $('.panelToolbarIcons'),
     collection: new ButtonList([
       { type: "newWindow", description: "Open a new window",
@@ -133,7 +182,8 @@ define(["jquery", "underscore", "backbone", "jquery-ui"], function($, _, Backbon
       { type: "options", description: "Open Firefox’s options",
         shortcut: "Ctrl+O", label: "Preferences" },
       { type: "addons", description: "Open a panel to manage your add-ons",
-        shortcut: "Ctrl+Shift+A", label: "Add-ons" }
+        shortcut: "Ctrl+Shift+A", label: "Add-ons" },
+      new Spacer(),
       ])
   });
 
@@ -179,7 +229,7 @@ define(["jquery", "underscore", "backbone", "jquery-ui"], function($, _, Backbon
   });
 
   function render() {
-    // toolbar.render();
+    toolbar.render();
     menuPanel.render();
     customizePanel.render();
     $(".panelToolbarIconsRow").sortable({
