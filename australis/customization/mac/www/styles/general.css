@@ -61,7 +61,7 @@ body {
   margin: 0px;
   -moz-transition-duration: 150ms;
 }
-.windowOuterContainer.customizeMode {
+.window.customizeMode .windowOuterContainer {
   padding: 80px !important;
 }
 

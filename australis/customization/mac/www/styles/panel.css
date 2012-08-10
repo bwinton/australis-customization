@@ -74,18 +74,21 @@
 }
 
 /* Panel Buttons */
+.panelToolbarIcons .spacer,
 .menuPanelButton {
   float: left;
   margin: 0;
   padding: 8px 6px;
   z-index: 5;
   width: 72px;
-  border: 1px solid transparent;
-  -moz-user-select: none;
   cursor: default;
   -moz-transition-property: background-color, border-color, box-shadow;
   -moz-transition-duration: 150ms;
   -moz-transition-timing-function: ease;
+}
+
+.menuPanelButton {
+  border: 1px solid transparent;
 }
 
 .menuPanelButton:hover {
@@ -136,21 +139,21 @@
   border-radius: 3px;
 }
 
-.menuPanelButton.spacer {
+.panelToolbarIcons .spacer {
   display: none;
   height: 42px;
   margin: 6px;
 }
 
-.menuPanelButton.spacer:nth-child(3n) {
+.panelToolbarIcons .spacer:nth-child(3n) {
   width: 60px;
 }
 
-.menuPanelButton.spacer:nth-child(3n+1) {
+.panelToolbarIcons .spacer:nth-child(3n+1) {
   width: 235px;
 }
 
-.menuPanelButton.spacer:nth-child(3n+2) {
+.panelToolbarIcons .spacer:nth-child(3n+2) {
   width: 149px;
 }
 
@@ -182,7 +185,6 @@
   -moz-transition-property: background-color, border-color, box-shadow;
   -moz-transition-duration: 150ms;
   -moz-transition-timing-function: ease;
-  -moz-user-select: none;
   cursor: default;
 }
 .panelSectionEditContainerButton:last-child {

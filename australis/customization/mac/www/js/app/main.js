@@ -13,17 +13,11 @@ define(function (require) {
 
   function toggleCustomizeTab() {
     var button = $("div.menuButton");
-    $("div.windowOuterContainer").toggleClass("customizeMode");
     $("div.window").toggleClass("customizeMode");
-    $("div.backButton").toggleClass("customizeMode");
-    $("div.locationBar").toggleClass("customizeMode");
-    button.attr("custom", !button.hasClass("customizeMode"));
-    button.toggleClass("customizeMode");
   };
 
   function enterCustomizeMode() {
-    var button = $("div.menuButton");
-    if (button.hasClass("customizeMode"))
+    if ($("div.window").hasClass("customizeMode"))
       // We're in customize mode already!
       return;
 
@@ -43,8 +37,7 @@ define(function (require) {
   };
 
   function leaveCustomizeMode() {
-    var button = $("div.menuButton");
-    if (!button.hasClass("customizeMode"))
+    if (!$("div.window").hasClass("customizeMode"))
       // We're out of customize mode already!
       return;
 
@@ -67,7 +60,7 @@ define(function (require) {
   $(function() {
     models.render();
     $('div.menuButton').click(function() {
-      if($(this).attr("custom") !== "true")
+      if (!$("div.window").hasClass("customizeMode"))
         toggleMenuPanel();
     });
 
@@ -92,13 +85,12 @@ define(function (require) {
 
     $('#restore').click(function() {
       models.render();
-      $(".spacer").show();
+      $(".spacer").show(0, function() {
+        $(".navBar .spacer").css("display", "-moz-box");
+      });
       $(".panelToolbarIconsRow").sortable("enable");
     });
 
-    // $('.customizeToolsArea').droppable(models.customizePanel.dropOpts);
-
-//    $("#arrowPanel").droppable(models.menuPanel.dropOpts)
     $("#arrowPanel")
       .contextMenu({menu: "panelContext"}, function(a, el, pos) {
       switch (a) {
