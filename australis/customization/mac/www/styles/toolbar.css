@@ -50,7 +50,6 @@
   margin: 8px 2px 8px 0;
   border: 1px solid transparent;
   border-radius: 2px;
-  -moz-user-select:none;
   cursor: default;
   -moz-transition-property: background-color, border-color, box-shadow;
   -moz-transition-duration: 150ms;
@@ -183,7 +182,6 @@
   box-shadow: 0 1px 0 hsla(0,0%,100%,.3) inset,
               0 0 0 1px hsla(0,0%,100%,.3) inset,
               0 1px 0 hsla(210,54%,20%,.03);
-  -moz-user-select:none;
   cursor: default;
   -moz-transition-property: background-color, border-color, box-shadow;
   -moz-transition-duration: 150ms;
@@ -237,6 +235,7 @@
 }
 
 .locationBarLabel {
+  -moz-user-select: text;
   -moz-box-flex: 1;
   min-width: 60px;
   white-space: nowrap;
@@ -262,7 +261,6 @@
   -moz-box-flex: 0;
   padding: 3px 4px;
   border-left: 1px solid transparent;
-  -moz-user-select:none;
   cursor: default;
   font-size: 0;
   line-height: 0;

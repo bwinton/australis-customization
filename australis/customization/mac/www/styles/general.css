@@ -10,6 +10,7 @@ html {
 
 body {
   height: 100%;
+  -moz-user-select: -moz-none;
 }
 
 /* ---Image Preloading--- */
@@ -66,7 +67,6 @@ body {
 
 /* ContentArea */
 .contentArea {
-  -moz-user-select: none;
   display: -moz-box;
   padding: 0;
   -moz-box-flex: 1;
