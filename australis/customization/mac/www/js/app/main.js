@@ -26,7 +26,7 @@ define(function (require) {
     // We're in customize mode!!!
     toggleCustomizeTab();
     $("#menuPanel").appendTo($("div.customizeMenuArea"));
-    $("#menuPanel").css("z-index", 0);
+    $("#menuPanel").css("z-index", "auto");
     $("div.customizeContentContainer").css({"display":"block"});
     $("#arrowPanel").disableContextMenu();
     $(".menuPanelButton").disableContextMenu();
