@@ -60,13 +60,22 @@ define(function (require) {
   }
 
   $(function() {
+    var options = {};
+    if (window.location.search)
+      try {
+        options = JSON.parse(decodeURI(window.location.search.substr(1)));
+      } catch (e) {
+        console.log(e);
+      }
+    console.log("Options = "+JSON.stringify(options));
+
     models.render();
     $(".navBar").on("click", ".menuButton", function() {
       if (!$("div.window").hasClass("customizeMode"))
         toggleMenuPanel();
     });
 
-    if (window.location.search == "?scroll") {
+    if (options.scroll) {
       var current = 0;
       setInterval(function scrollBg(){
         current -= 1;
@@ -133,17 +142,32 @@ define(function (require) {
       if (clicks == 1) {
         setTimeout(function() {
           if (clicks == 1) {
-            self.effect("shake", { times: 3, distance: 5 }, 100);
+            self.effect("shake", { times: options.times || 1, distance: options.distance || 2 }, options.duration || 100);
           } else {
-            var sortable = $("#arrowPanel .panelToolbarIconsRow");
-            var spacer = sortable.find(".spacer");
             var position = self.css("position");
             self.css({position: "absolute", top: self.offset().top, left: self.offset().left});
-            self.animate({top: spacer.offset().top, left: spacer.offset().left}, 300, function(){
-              self.insertBefore(spacer);
-              self.css("position", position);
-              sortable.sortable("refresh");
-            });
+
+            if (self.parents('#arrowPanel').length) {
+              var sortable = $(".navBar .panelToolbarIconsRow");
+              if (options.goToPanel)
+                sortable = $(".customizeToolsArea .panelToolbarIconsRow");
+              var spacer = sortable.find(".menuPanelButton:last-child");
+              console.log(sortable.length + ", " + spacer.length);
+              self.animate({top: spacer.offset().top, left: spacer.offset().left}, 300, function(){
+                self.insertAfter(spacer);
+                self.css("position", position);
+                sortable.sortable("refresh");
+              });
+            } else {
+              var sortable = $("#arrowPanel .panelToolbarIconsRow");
+              var spacer = sortable.find(".spacer");
+              self.animate({top: spacer.offset().top, left: spacer.offset().left}, 300, function(){
+                self.insertBefore(spacer);
+                self.css("position", position);
+                sortable.sortable("refresh");
+              });
+            }
+
           }
           clicks = 0;
         }, 200);
