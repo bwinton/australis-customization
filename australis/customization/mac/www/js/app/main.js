@@ -8,11 +8,13 @@ define(function (require) {
   require("jquery.contextMenu");
 
   function toggleBookmarkStar() {
-    $('.bookmarkStar').toggleClass('starred');
+    if ($("div.window").hasClass("customizeMode"))
+      // We're in customize mode!
+      return;
+    $('.bookmark .button').toggleClass('starred');
   };
 
   function toggleCustomizeTab() {
-    var button = $("div.menuButton");
     $("div.window").toggleClass("customizeMode");
   };
 
@@ -59,7 +61,7 @@ define(function (require) {
 
   $(function() {
     models.render();
-    $('div.menuButton').click(function() {
+    $(".navBar").on("click", ".menuButton", function() {
       if (!$("div.window").hasClass("customizeMode"))
         toggleMenuPanel();
     });
@@ -75,7 +77,7 @@ define(function (require) {
       }, 50);
     }
 
-    $('.bookmarkStar').click(toggleBookmarkStar);
+    $('.bookmark').click(toggleBookmarkStar);
     $('#customize').click(enterCustomizeMode);
     $('#done').click(leaveCustomizeMode);
     $('html').keypress(function(event) {
@@ -91,8 +93,8 @@ define(function (require) {
       $(".panelToolbarIconsRow").sortable("enable");
     });
 
-    $("#arrowPanel")
-      .contextMenu({menu: "panelContext"}, function(a, el, pos) {
+    $('#arrowPanel')
+      .contextMenu({menu: 'panelContext'}, function(a, el, pos) {
       switch (a) {
       case "addMore":
         enterCustomizeMode();
@@ -107,7 +109,7 @@ define(function (require) {
       }
     });
 
-    $(".menuPanelButton").contextMenu({menu: "buttonContext"}, function(a, el, pos) {
+    $('.menuPanelButton').contextMenu({menu: "buttonContext"}, function(a, el, pos) {
       switch (a) {
       case "customize":
         enterCustomizeMode();

@@ -301,17 +301,9 @@
 }
 
 
-.toolbarButton.bookmarkStar > .icon {
-  background-image: url(../images/toolbarButton-bookmarkUnstarred.png);
-  background-position: top left;
-  background-size: cover;
-  background-repeat: no-repeat;
-  width: 16px;
-  height: 16px;
+.menuPanelButton.bookmark > .button {
+  background-image: url(../images/button-bookmarkUnstarred.png) !important;
 }
-.toolbarButton.bookmarkStar.starred > .icon {
-  background-image: url(../images/toolbarButton-bookmarkStarred.png);
-  background-position: top left;
-  background-size: cover;
-  background-repeat: no-repeat;
+.menuPanelButton.bookmark > .button.starred {
+  background-image: url(../images/button-bookmarkStarred.png) !important;
 }

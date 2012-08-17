@@ -154,8 +154,8 @@ define(["jquery", "underscore", "backbone", "jquery-ui"], function($, _, Backbon
     el: $(".navBar"),
     collection: new ButtonList([
       new Spacer(),
-      new SplitButton({ type: "bookmark", description: "Bookmark this page",
-        shortcut: "Ctrl-D", label: "Bookmark" }),
+      { type: "bookmark", description: "Bookmark this page",
+        shortcut: "Ctrl-D", label: "Bookmark" },
       { type: "download", description: "Downloads",
         shortcut: "Ctrl-J", label: "Downloads" }
       ])
