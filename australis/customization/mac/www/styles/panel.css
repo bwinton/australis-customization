@@ -118,6 +118,7 @@
   margin: 3px 18px;
   width: 32px;
   height: 32px;
+  background-size: contain;
 }
 
 .menuPanelButton > .label {
