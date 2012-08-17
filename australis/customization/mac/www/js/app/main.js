@@ -133,11 +133,17 @@ define(function (require) {
       if (clicks == 1) {
         setTimeout(function() {
           if (clicks == 1) {
-              self.effect("shake", { times: 3, distance: 5 }, 100);
+            self.effect("shake", { times: 3, distance: 5 }, 100);
           } else {
             var sortable = $("#arrowPanel .panelToolbarIconsRow");
-            self.insertBefore(sortable.find(".spacer"));
-            sortable.sortable("refresh");
+            var spacer = sortable.find(".spacer");
+            var position = self.css("position");
+            self.css({position: "absolute", top: self.offset().top, left: self.offset().left});
+            self.animate({top: spacer.offset().top, left: spacer.offset().left}, 300, function(){
+              self.insertBefore(spacer);
+              self.css("position", position);
+              sortable.sortable("refresh");
+            });
           }
           clicks = 0;
         }, 200);
