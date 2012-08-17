@@ -124,5 +124,26 @@ define(function (require) {
       }
     });
 
+    var clicks = 0;
+    $(".window").on("click", ".menuPanelButton", function(event) {
+      if (!$("div.window").hasClass("customizeMode"))
+        return;
+      var self = $(this);
+      clicks++;
+      if (clicks == 1) {
+        setTimeout(function() {
+          if (clicks == 1) {
+              self.effect("shake", { times: 3, distance: 5 }, 100);
+          } else {
+            var sortable = $("#arrowPanel .panelToolbarIconsRow");
+            self.insertBefore(sortable.find(".spacer"));
+            sortable.sortable("refresh");
+          }
+          clicks = 0;
+        }, 200);
+      }
+    });
+
   });
+
 });
