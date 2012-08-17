@@ -66,10 +66,7 @@ define(["jquery", "underscore", "backbone", "jquery-ui"], function($, _, Backbon
               $(this).add(".spacer").addClass("mousedown");
           })
           .mouseup(function(event) {
-            $(this).add(".spacer").removeClass("mousedown");
-          })
-          .bind("dragstop", function(event, ui) {
-            $(this).add(".spacer").removeClass("mousedown");
+            $(".mousedown").add(".spacer").removeClass("mousedown");
           });
       });
 
