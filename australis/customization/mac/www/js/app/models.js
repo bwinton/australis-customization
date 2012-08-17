@@ -44,48 +44,6 @@ define(["jquery", "underscore", "backbone", "jquery-ui"], function($, _, Backbon
 
 
   var ButtonView = Backbone.View.extend({
-    dragOpts: {
-      disabled: true,
-      containment: '.windowOuterContainer',
-      revert: "invalid",
-      /* helper: "clone", */
-      start: function handleDragStart(event, ui) {
-        var draggable = $(event.target);
-        /*
-        draggable.css("opacity", "0");
-        draggable.animate({width: "0px", margin: "0px", padding: "0px"}, 150);
-        */
-      },
-      drag: function handleDragEvent(event, ui) {
-        var drop = ui.helper.data("dropTarget");
-        if (drop) {
-          drop(event, ui);
-        }
-      },
-    },
-
-    dropOpts: {
-      accept: '.menuPanelButton',
-      over: function handleDropOver(event, ui) {
-        var self = $(this);
-        ui.helper.data("dropTarget", function handleDropDrag(event, ui) {
-          var closest = JSON.stringify(ui.helper.offset()) + ", ";
-          // Loop through those, to see which one gets closest to ui.helper.offset()
-          self.find(".menuPanelButton").each(function(i, e) {
-            closest += JSON.stringify($(this).offset()) + ", ";
-          });
-          console.log(closest);
-        });
-      },
-      out: function handleDropOut(event, ui) {
-        ui.helper.data("dropTarget", null);
-      },
-      drop: function handleDropEvent(event, ui) {
-        ui.draggable.insertBefore($(this).find(".spacer").first())
-          .css({width:"", margin:"", padding:"", opacity:"", top: "", left: ""});
-      }
-    },
-
     renderHeader: function($el) {},
     renderFooter: function($el) {},
 
