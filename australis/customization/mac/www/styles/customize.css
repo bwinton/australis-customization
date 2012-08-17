@@ -73,7 +73,7 @@
 }
 
 x-tabpanel > *:first-child {
-    min-height: 477px;
+  min-height: 477px;
 }
 
 .window.customizeMode .spacer {
@@ -90,10 +90,11 @@ x-tabpanel > *:first-child {
               0 0 5px hsla(204,73%,70%,.5);
 }
 
-#addons {
+.tabContent {
   width: 100%;
-  height: 450px;
+  height: 510px;
   border: 0px;
+  overflow: auto;
 }
 
 
