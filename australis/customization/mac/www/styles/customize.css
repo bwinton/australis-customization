@@ -134,15 +134,7 @@ x-tabpanel > *:first-child {
 
 /* Tabs! */
 x-tabbox, x-tabs, x-tab {
-  display: -moz-box;
-}
-
-x-tabbox, x-tabpanels, x-tabpanel {
-  -moz-box-orient: vertical;
-}
-
-x-tabs, x-tab, x-tabpanels {
-  -moz-box-flex: 0;
+  display: block;
 }
 
 x-tab {
@@ -158,6 +150,8 @@ x-tab {
 
 x-tabs {
   margin-top: 9px;
+  width: 156px;
+  float: left;
 }
 
 x-tab > img {
@@ -196,12 +190,13 @@ x-tabpanels {
   margin: 5px;
   margin-top: 14px;
   margin-left: -6px;
-  min-width: 700px;
-  max-width: 700px;
+  width: calc(100% - 520px);
+  float: left;
 }
 
 .tabPanelArrowLeft {
   position: relative;
+  float: left;
   margin-top: 21px;
   width: 20px;
   height: 100px;

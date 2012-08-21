@@ -150,16 +150,19 @@ define(function (require) {
             var position = self.css("position");
             var offset = self.offset();
             self.appendTo($(".customizeToolsArea .panelToolbarIconsRow"));
-            self.css({position: "absolute", top: offset.top, left: offset.left});
+            self.css({position: "absolute", top: offset.top, left: offset.left, "z-index": 999});
 
             if (inMenu) {
               sortable = $(".navBar .panelToolbarIconsRow");
               if (options.goToPanel)
                 sortable = $(".customizeToolsArea .panelToolbarIconsRow");
-              spacer = sortable.find(".menuPanelButton:last-child");
-              self.animate({top: spacer.offset().top, left: spacer.offset().left}, 300, function(){
+              spacer = sortable.children().last();
+              console.log("spacer = " +  spacer.html());
+              self.animate({top: spacer.offset().top,
+                            left: spacer.offset().left + spacer.width() - self.width()},
+                           300, function(){
                 self.insertAfter(spacer);
-                self.css("position", position);
+                self.css({"position": position, "z-index": "auto"});
                 sortable.sortable("refresh");
               });
             } else {
