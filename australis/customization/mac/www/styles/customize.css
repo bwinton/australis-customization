@@ -48,6 +48,40 @@
   font-weight: bold;
 }
 
+.window.customizeMode .navBar {
+  background-image: none;
+  border-bottom: none;
+  box-shadow: none;
+  padding: 5px;
+}
+
+.window.customizeMode .menuButton {
+  border: 1px solid transparent;
+  background-color: hsla(210,32%,93%,.2);
+  border-color: transparent;
+  background-image: -moz-linear-gradient(hsla(0,0%,100%,.6), hsla(0,0%,100%,.1));
+  background-clip: padding-box;
+  box-shadow: none;
+  opacity: .5;
+}
+
+.window.customizeMode .panelFooter img {
+  opacity: .5;
+}
+
+.window.customizeMode .panelFooter .normalButton {
+    margin: 16px 9px 9px;
+    padding: 2px 6px;
+    background-color: rgba(255, 255, 255, 0.2);
+    background-image: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.1));
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 2.5px 2.5px 2.5px 2.5px;
+    box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.5) inset, 0px 1px 0px rgba(255, 255, 255, 0.5);
+    font-size: 11px;
+    line-height: 18px;
+    opacity: .5;
+}
+
 .window.customizeMode .menuPanelButton {
   cursor: -moz-grab;
   -moz-transition: -moz-transform 0.5s ease-in-out 100ms,
@@ -131,7 +165,7 @@ x-tab > img {
   padding-right: 5px;
 }
 
-x-tab:-moz-focusring {  
+x-tab:-moz-focusring {
   outline: none;
 }
 

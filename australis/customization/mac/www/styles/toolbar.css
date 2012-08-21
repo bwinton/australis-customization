@@ -36,13 +36,6 @@
   display: none;
 }
 
-.window.customizeMode .navBar {
-  background-image: none;
-  border-bottom: none;
-  box-shadow: none;
-  padding: 5px;
-}
-
 .toolbarButton {
   -moz-box-flex: 0;
   min-width: 16px;
@@ -306,14 +299,4 @@
 }
 .menuPanelButton.bookmark > .button.starred {
   background-image: url(../images/button-bookmarkStarred.png) !important;
-}
-
-.window.customizeMode .menuButton {
-  border: 1px solid transparent;
-  background-color: hsla(210,32%,93%,.2);
-  border-color: transparent;
-  background-image: -moz-linear-gradient(hsla(0,0%,100%,.6), hsla(0,0%,100%,.1));
-  background-clip: padding-box;
-  box-shadow: none;
-  opacity: .5;
 }
