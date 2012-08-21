@@ -28,7 +28,7 @@ define(function (require) {
     $("#menuPanel").appendTo($("div.customizeMenuArea"));
     $("#menuPanel").css("z-index", "auto");
     $("div.customizeContentContainer").css({"display":"block"});
-    $("#arrowPanel").disableContextMenu();
+    $(".arrowPanel").disableContextMenu();
     $(".menuPanelButton").disableContextMenu();
     $(".panelToolbarIconsRow").sortable("enable");
     setTimeout(function() {
@@ -47,7 +47,7 @@ define(function (require) {
     $(".spacer").slideUp("fast");
     $(".panelToolbarIconsRow").sortable("disable");
     $(".menuPanelButton").enableContextMenu();
-    $("#arrowPanel").enableContextMenu();
+    $(".arrowPanel").enableContextMenu();
     $("#menuPanel").css("z-index", 9999);
     $("#menuPanel").appendTo($("div.window"));
     $("div.customizeContentContainer").css({"display":"none"});
@@ -102,7 +102,7 @@ define(function (require) {
       $(".panelToolbarIconsRow").sortable("enable");
     });
 
-    $('#arrowPanel')
+    $('.arrowPanel')
       .contextMenu({menu: 'panelContext'}, function(a, el, pos) {
       switch (a) {
       case "addMore":
@@ -146,7 +146,7 @@ define(function (require) {
           } else {
             var sortable;
             var spacer;
-            var inMenu = self.parents('#arrowPanel').length;
+            var inMenu = self.parents('.arrowPanel').length;
             var position = self.css("position");
             var offset = self.offset();
             self.appendTo($(".customizeToolsArea .panelToolbarIconsRow"));
@@ -163,7 +163,7 @@ define(function (require) {
                 sortable.sortable("refresh");
               });
             } else {
-              sortable = $("#arrowPanel .panelToolbarIconsRow");
+              sortable = $(".arrowPanel .panelToolbarIconsRow");
               spacer = sortable.find(".spacer");
               self.animate({top: spacer.offset().top, left: spacer.offset().left}, 300, function(){
                 self.insertBefore(spacer);

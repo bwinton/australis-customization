@@ -5,7 +5,7 @@
 .arrowPanelContainer {
   position: absolute;
   top: 40px;
-  right: 0px;
+  right: 0;
   display: none;
   z-index: 9999;
 }
@@ -27,7 +27,7 @@
   pointer-events: none;
 }
 
-#arrowPanel {
+.arrowPanel {
   display: -moz-box;
   -moz-box-orient: vertical;
   margin-top: -8px;
@@ -155,7 +155,7 @@
 }
 
 .panelToolbarIcons .spacer:nth-child(3n+2) {
-  width: 149px;
+  width: 146px;
 }
 
 .panelSectionEditContainer.spacer {
