@@ -164,6 +164,10 @@
   height: 22px;
 }
 
+.panelSectionEditContainer.spacer:nth-child(n+4) {
+  display: none !important;
+}
+
 /*Panel Edit Buttons*/
 .panelSectionEditContainer {
   display: -moz-box;
