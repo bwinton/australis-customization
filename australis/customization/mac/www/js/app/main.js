@@ -12,11 +12,11 @@ define(function (require) {
       // We're in customize mode!
       return;
     $('.bookmark .button').toggleClass('starred');
-  };
+  }
 
   function toggleCustomizeTab() {
     $("div.window").toggleClass("customizeMode");
-  };
+  }
 
   function enterCustomizeMode() {
     if ($("div.window").hasClass("customizeMode"))
@@ -36,7 +36,7 @@ define(function (require) {
         $(".navBar .spacer").css("display", "-moz-box");
       });
     }, 100);
-  };
+  }
 
   function leaveCustomizeMode() {
     if (!$("div.window").hasClass("customizeMode"))
@@ -52,7 +52,7 @@ define(function (require) {
     $("#menuPanel").appendTo($("div.window"));
     $("div.customizeContentContainer").css({"display":"none"});
     toggleMenuPanel();
-  };
+  }
 
   function toggleMenuPanel() {
     $('div.toolbarButton.customizeButton').toggleClass('toggled');
@@ -109,7 +109,7 @@ define(function (require) {
         enterCustomizeMode();
         break;
       default:
-        alert(
+        console.log(
             "Action: " + a + "\n\n" +
             "Element ID: " + $(el).attr("id") + "\n\n" +
             "X: " + pos.x + "  Y: " + pos.y + " (relative to element)\n\n" +
@@ -124,7 +124,7 @@ define(function (require) {
         enterCustomizeMode();
         break;
       default:
-        alert(
+        console.log(
             "Action: " + a + "\n\n" +
             "Element ID: " + $(el).attr("id") + "\n\n" +
             "X: " + pos.x + "  Y: " + pos.y + " (relative to element)\n\n" +
@@ -144,23 +144,27 @@ define(function (require) {
           if (clicks == 1) {
             self.effect("shake", { times: options.times || 1, distance: options.distance || 2 }, options.duration || 100);
           } else {
+            var sortable;
+            var spacer;
+            var inMenu = self.parents('#arrowPanel').length;
             var position = self.css("position");
-            self.css({position: "absolute", top: self.offset().top, left: self.offset().left});
+            var offset = self.offset();
+            self.appendTo($(".customizeToolsArea .panelToolbarIconsRow"));
+            self.css({position: "absolute", top: offset.top, left: offset.left});
 
-            if (self.parents('#arrowPanel').length) {
-              var sortable = $(".navBar .panelToolbarIconsRow");
+            if (inMenu) {
+              sortable = $(".navBar .panelToolbarIconsRow");
               if (options.goToPanel)
                 sortable = $(".customizeToolsArea .panelToolbarIconsRow");
-              var spacer = sortable.find(".menuPanelButton:last-child");
-              console.log(sortable.length + ", " + spacer.length);
+              spacer = sortable.find(".menuPanelButton:last-child");
               self.animate({top: spacer.offset().top, left: spacer.offset().left}, 300, function(){
                 self.insertAfter(spacer);
                 self.css("position", position);
                 sortable.sortable("refresh");
               });
             } else {
-              var sortable = $("#arrowPanel .panelToolbarIconsRow");
-              var spacer = sortable.find(".spacer");
+              sortable = $("#arrowPanel .panelToolbarIconsRow");
+              spacer = sortable.find(".spacer");
               self.animate({top: spacer.offset().top, left: spacer.offset().left}, 300, function(){
                 self.insertBefore(spacer);
                 self.css("position", position);

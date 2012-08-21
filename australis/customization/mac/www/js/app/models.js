@@ -14,15 +14,15 @@ define(["jquery", "underscore", "backbone", "jquery-ui"], function($, _, Backbon
         "  <div style='background-image: url(\"images/button-<%= type %>.png\")'" +
         "       class='button'></div>" +
         "  <div class='label'><%= label %></div>" +
-        "</div>"),
-    },
+        "</div>")
+    }
   });
 
   var Spacer = Button.extend({
     defaults: {
       template: _.template(
-        "<div class='spacer' title='Drop buttons here!'></div>"),
-    },
+        "<div class='spacer' title='Drop buttons here!'></div>")
+    }
   });
 
   var SplitButton = Button.extend({
@@ -35,11 +35,11 @@ define(["jquery", "underscore", "backbone", "jquery-ui"], function($, _, Backbon
         "  <div class='toolbarButton dropDown'><img src='images/toolbarButton-dropDown.png'></div>" +
         "  <div class='label'><%= label %></div>" +
         "</div>")
-    },
-  })
+    }
+  });
 
   var ButtonList = Backbone.Collection.extend({
-    model: Button,
+    model: Button
   });
 
 
@@ -72,7 +72,7 @@ define(["jquery", "underscore", "backbone", "jquery-ui"], function($, _, Backbon
 
       this.renderFooter($el);
 
-    },
+    }
   });
 
 
@@ -114,8 +114,7 @@ define(["jquery", "underscore", "backbone", "jquery-ui"], function($, _, Backbon
       { type: "download", description: "Downloads",
         shortcut: "Ctrl-J", label: "Downloads" }
       ])
-  })
-
+  });
 
   var menuPanel = new ButtonView({
     el: $('.panelToolbarIcons'),
@@ -138,7 +137,7 @@ define(["jquery", "underscore", "backbone", "jquery-ui"], function($, _, Backbon
         shortcut: "Ctrl+O", label: "Preferences" },
       { type: "addons", description: "Open a panel to manage your add-ons",
         shortcut: "Ctrl+Shift+A", label: "Add-ons" },
-      new Spacer(),
+      new Spacer()
       ])
   });
 
@@ -180,7 +179,7 @@ define(["jquery", "underscore", "backbone", "jquery-ui"], function($, _, Backbon
         shortcut: "Ctrl-Shift-J", label: "Developer" },
       { type: "encoding", description: "Choose your character encoding",
         shortcut: "Ctrl-Shift-?", label: "Encoding" }
-      ]),
+      ])
   });
 
   function render() {
@@ -191,11 +190,18 @@ define(["jquery", "underscore", "backbone", "jquery-ui"], function($, _, Backbon
       disabled: true,
       connectWith: ".panelToolbarIconsRow",
       items: ".menuPanelButton",
+      stop: function(event, ui) {
+        //console.log("Got stop.");
+      },
+      change: function(event, ui) {
+        if (ui.placeholder.index() == 2)
+          console.log("Got change.  "+ui.placeholder.index());
+      }
     });
-  };
+  }
 
   return {menuPanel: menuPanel,
           customizePanel: customizePanel,
-          render: render}
+          render: render};
 
 });
