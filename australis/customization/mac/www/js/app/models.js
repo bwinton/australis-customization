@@ -14,6 +14,7 @@ define(["jquery", "underscore", "backbone", "jquery-ui"], function($, _, Backbon
         "  <div style='background-image: url(\"images/button-<%= type %>.png\")'" +
         "       class='button'></div>" +
         "  <div class='label'><%= label %></div>" +
+        "  <div class='shortcut'><%= shortcut %></div>" +
         "</div>")
     }
   });

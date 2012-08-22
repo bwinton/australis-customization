@@ -82,6 +82,11 @@
   -moz-transition-timing-function: ease;
 }
 
+#menuPanel.listview .menuPanelButton {
+  width: 100%;
+  padding: 0;
+}
+
 .menuPanelButton {
   border: 1px solid transparent;
 }
@@ -116,6 +121,13 @@
   background-size: contain;
 }
 
+#menuPanel.listview .menuPanelButton > .button {
+  width: 16px;
+  height: 16px;
+  margin: 3px;
+  display: inline-block;
+}
+
 .menuPanelButton > .label {
   margin: 0;
   width: 72px;
@@ -129,10 +141,39 @@
   white-space: nowrap;
 }
 
+#menuPanel.listview .menuPanelButton > .label {
+  height: 20px;
+  display: inline-block;
+  text-align: start;
+}
+
+.menuPanelButton > .shortcut {
+  display: none;
+}
+
+#menuPanel.listview .menuPanelButton > .shortcut {
+  display: inline-block;
+  height: 20px;
+  font-size: 11px;
+  line-height: 16px;
+  opacity: 0.5;
+  float: right;
+  padding-right: 3px;
+  padding-top: 1px;
+  text-align: end;
+}
+
 .spacer {
   border: 1px dashed hsla(210,54%,20%,.2);
   border-color: hsla(210,54%,20%,.13) hsla(210,54%,20%,.16) hsla(210,54%,20%,.2);
   border-radius: 3px;
+}
+
+#menuPanel.listview .spacer {
+  width: 100%;
+  margin-left: -1px;
+  height: 20px;
+  padding: 0;
 }
 
 .panelToolbarIcons .spacer {

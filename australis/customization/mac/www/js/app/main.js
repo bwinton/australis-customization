@@ -76,6 +76,10 @@ define(function (require) {
       }
     console.log("Options = "+JSON.stringify(options));
 
+    if (options.list)
+      $("#menuPanel").addClass("listview");
+
+
     models.render();
     $(".navBar").on("click", ".menuButton", function() {
       if (!$("div.window").hasClass("customizeMode"))
