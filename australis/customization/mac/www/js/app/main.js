@@ -169,7 +169,7 @@ define(function (require) {
                             left: spacer.offset().left + spacer.width() - self.width()},
                            ANIMATION_TIME, function(){
                 self.insertAfter(spacer);
-                self.css({"position": position, "z-index": "auto"});
+                self.css({"position": position, top: "auto", left: "auto", "z-index": "auto"});
                 sortable.sortable("refresh");
               });
             } else {
@@ -177,7 +177,7 @@ define(function (require) {
               spacer = sortable.find(".spacer");
               self.animate({top: spacer.offset().top, left: spacer.offset().left}, ANIMATION_TIME, function(){
                 self.insertBefore(spacer);
-                self.css("position", position);
+                self.css({"position": position, top: "auto", left: "auto", "z-index": "auto"});
                 sortable.sortable("refresh");
               });
             }
