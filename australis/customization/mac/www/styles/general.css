@@ -19,8 +19,7 @@ body {
   height: 1px;
   background-image: url(../images/toolbarButton-bookmarkStarred.png),
                     url(../images/windowBackgroundCustomizeMode.jpg),
-                    url(../images/webpage-chromaticPixel.jpg),
-                    url(../images/webpage-theHobbit.jpg);
+                    url(../images/webpage-start.png);
 }
 
 .outerContainer {
@@ -37,7 +36,7 @@ body {
   -moz-box-orient: vertical;
   -moz-box-flex: 1;
   position: relative;
-  margin: 0px;
+  margin: 0;
   border: none;
   color: hsl(0,0%,10%);
   font-family: Segoe UI, Verdana, sans-serif;
@@ -58,7 +57,7 @@ body {
   position: relative;
   height: 100%;
   z-index: 199;
-  margin: 0px;
+  margin: 0;
   -moz-transition-duration: 150ms;
 }
 .window.customizeMode .windowOuterContainer {
@@ -72,7 +71,7 @@ body {
   -moz-box-flex: 1;
   border-radius: 0 0 2.5px 2.5px;
   background-color: white;
-  background-image: url(../images/webpage-theHobbit.jpg);
+  background-image: url(../images/webpage-start.png);
   background-position: 0 0;
   background-size: cover;
 }
