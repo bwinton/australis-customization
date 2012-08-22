@@ -7,6 +7,8 @@ define(function (require) {
   require("jquery-ui");
   require("jquery.contextMenu");
 
+  const ANIMATION_TIME = 300;
+
   function toggleBookmarkStar() {
     if ($("div.window").hasClass("customizeMode"))
       // We're in customize mode!
@@ -24,9 +26,12 @@ define(function (require) {
       return;
 
     // We're in customize mode!!!
+    var menuPanel = $("#menuPanel");
     toggleCustomizeTab();
-    $("#menuPanel").appendTo($("div.customizeMenuArea"));
-    $("#menuPanel").css("z-index", "auto");
+    menuPanel.appendTo($("div.customizeMenuArea"));
+    menuPanel.animate({top: "130px", right: "90px"}, ANIMATION_TIME, function(){
+      menuPanel.css("z-index", "auto");
+    });
     $("div.customizeContentContainer").css({"display":"block"});
     $(".arrowPanel").disableContextMenu();
     $(".menuPanelButton").disableContextMenu();
@@ -48,8 +53,10 @@ define(function (require) {
     $(".panelToolbarIconsRow").sortable("disable");
     $(".menuPanelButton").enableContextMenu();
     $(".arrowPanel").enableContextMenu();
-    $("#menuPanel").css("z-index", 9999);
-    $("#menuPanel").appendTo($("div.window"));
+    var menuPanel = $("#menuPanel");
+    menuPanel.css("z-index", 9999);
+    menuPanel.appendTo($("div.window"));
+    menuPanel.animate({top: "40px", right: "0px"}, ANIMATION_TIME);
     $("div.customizeContentContainer").css({"display":"none"});
     toggleMenuPanel();
   }
@@ -160,7 +167,7 @@ define(function (require) {
               console.log("spacer = " +  spacer.html());
               self.animate({top: spacer.offset().top,
                             left: spacer.offset().left + spacer.width() - self.width()},
-                           300, function(){
+                           ANIMATION_TIME, function(){
                 self.insertAfter(spacer);
                 self.css({"position": position, "z-index": "auto"});
                 sortable.sortable("refresh");
@@ -168,7 +175,7 @@ define(function (require) {
             } else {
               sortable = $(".arrowPanel .panelToolbarIconsRow");
               spacer = sortable.find(".spacer");
-              self.animate({top: spacer.offset().top, left: spacer.offset().left}, 300, function(){
+              self.animate({top: spacer.offset().top, left: spacer.offset().left}, ANIMATION_TIME, function(){
                 self.insertBefore(spacer);
                 self.css("position", position);
                 sortable.sortable("refresh");

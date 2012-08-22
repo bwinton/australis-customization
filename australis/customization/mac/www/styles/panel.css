@@ -10,11 +10,6 @@
   z-index: 9999;
 }
 
-.window.customizeMode .arrowPanelContainer {
-  top: 130px;
-  right: 90px;
-}
-
 .arrowPanelArrowTop {
   position: relative;
   margin-right: 14px;
