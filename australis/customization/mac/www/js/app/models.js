@@ -61,14 +61,7 @@ define(["jquery", "underscore", "backbone", "jquery-ui"], function($, _, Backbon
 
       this.collection.each(function(model, i) {
         $(model.attributes.template(model.toJSON()))
-          .appendTo($el.children(":last-child"))
-          .mousedown(function(event) {
-            if ($(".window.customizeMode").length)
-              $(this).add(".spacer").addClass("mousedown");
-          })
-          .mouseup(function(event) {
-            $(".mousedown").add(".spacer").removeClass("mousedown");
-          });
+          .appendTo($el.children(":last-child"));
       });
 
       this.renderFooter($el);

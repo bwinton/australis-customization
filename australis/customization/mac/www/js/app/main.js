@@ -205,6 +205,14 @@ define(function (require) {
       if (!$("div.window").hasClass("customizeMode"))
         toggleMenuPanel();
     });
+    $(".window").on("mousedown", ".menuPanelButton", function(event) {
+      if ($(".window.customizeMode").length)
+        $(this).add(".spacer").addClass("mousedown");
+    })
+    .on("mouseup", ".menuPanelButton", function(event) {
+      $(".mousedown").add(".spacer").removeClass("mousedown");
+    });
+
 
     if (options.scroll) {
       var current = 0;
