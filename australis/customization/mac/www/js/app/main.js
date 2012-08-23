@@ -27,14 +27,18 @@ define(function (require) {
 
     // We're in customize mode!!!
     var menuPanel = $("#menuPanel");
+    if ($(".arrowPanelContainer:visible").length === 0) {
+      $('div.toolbarButton.customizeButton').toggleClass('toggled');
+      $('div.arrowPanelContainer#menuPanel').toggle();
+    }
     toggleCustomizeTab();
     menuPanel.appendTo($("div.customizeMenuArea"));
     menuPanel.animate({top: "130px", right: "90px"}, ANIMATION_TIME, function(){
       menuPanel.css("z-index", "auto");
     });
     $("div.customizeContentContainer").css({"display":"block"});
+    setCustomizeContextMenu($(".menuPanelButton"));
     $(".arrowPanel").disableContextMenu();
-    $(".menuPanelButton").disableContextMenu();
     $(".panelToolbarIconsRow").sortable("enable");
     setTimeout(function() {
       $(".spacer").slideDown("fast", function() {
@@ -51,7 +55,7 @@ define(function (require) {
     toggleCustomizeTab();
     $(".spacer").slideUp("fast");
     $(".panelToolbarIconsRow").sortable("disable");
-    $(".menuPanelButton").enableContextMenu();
+    setNormalContextMenu($(".menuPanelButton"));
     $(".arrowPanel").enableContextMenu();
     var menuPanel = $("#menuPanel");
     menuPanel.css("z-index", 9999);
@@ -64,6 +68,116 @@ define(function (require) {
   function toggleMenuPanel() {
     $('div.toolbarButton.customizeButton').toggleClass('toggled');
     $('div.arrowPanelContainer#menuPanel').fadeToggle();
+  }
+
+  function setCustomizeContextMenu(el) {
+    el.destroyContextMenu();
+    el.contextMenu({menu: "buttonContext"}, function(a, el, pos) {
+      switch (a) {
+      case "menu":
+        moveToMenu($(el));
+        break;
+      case "toolbar":
+        moveToToolbar($(el));
+        break;
+      case "remove":
+        moveToPanel($(el));
+        break;
+      case "done":
+        leaveCustomizeMode();
+        break;
+      default:
+        console.log(
+            "Action: " + a + "\n\n" +
+            "Element ID: " + $(el).attr("id") + "\n\n" +
+            "X: " + pos.x + "  Y: " + pos.y + " (relative to element)\n\n" +
+            "X: " + pos.docX + "  Y: " + pos.docY+ " (relative to document)"
+            );
+        break;
+      }
+    });
+  }
+
+  function setNormalContextMenu(el) {
+    el.destroyContextMenu();
+    el.contextMenu({menu: 'panelContext'}, function(a, el, pos) {
+      if (a === "customize")
+        enterCustomizeMode();
+      else
+        console.log(
+            "Action: " + a + "\n\n" +
+            "Element ID: " + $(el).attr("id") + "\n\n" +
+            "X: " + pos.x + "  Y: " + pos.y + " (relative to element)\n\n" +
+            "X: " + pos.docX + "  Y: " + pos.docY+ " (relative to document)"
+            );
+    });
+  }
+
+  function moveToMenu(self) {
+    if (self.parents(".arrowPanel").length) {
+      $(".mousedown").add(".spacer").removeClass("mousedown");
+      return;
+    }
+    var position = self.css("position");
+    var offset = self.offset();
+    self.appendTo($(".customizeToolsArea"));
+    self.css({position: "absolute", top: offset.top, left: offset.left, "z-index": 999});
+
+    var sortable = $(".arrowPanel .panelToolbarIconsRow");
+    var spacer = sortable.find(".spacer");
+    self.animate({top: spacer.offset().top,
+                  left: spacer.offset().left},
+                 ANIMATION_TIME, function(){
+      self.insertBefore(spacer);
+      $(".mousedown").add(".spacer").removeClass("mousedown");
+      self.css({"position": position, top: "auto", left: "auto", "z-index": "auto"});
+      sortable.sortable("refresh");
+    });
+  }
+
+  function moveToToolbar(self) {
+    if (self.parents(".navBar").length) {
+      $(".mousedown").add(".spacer").removeClass("mousedown");
+      return;
+    }
+    var position = self.css("position");
+    var offset = self.offset();
+    self.appendTo($(".customizeToolsArea"));
+    self.css({position: "absolute", top: offset.top, left: offset.left, "z-index": 999});
+
+    var sortable = $(".navBar .panelToolbarIconsRow");
+    var spacer = sortable.children().last();
+    self.animate({top: spacer.offset().top,
+                  left: spacer.offset().left + spacer.width() - self.width()},
+                 ANIMATION_TIME, function(){
+      self.insertAfter(spacer);
+      $(".mousedown").add(".spacer").removeClass("mousedown");
+      self.css({"position": position, top: "auto", left: "auto", "z-index": "auto"});
+      sortable.sortable("refresh");
+    });
+  }
+
+  function moveToPanel(self) {
+    if (self.parents(".customizeToolsArea").length) {
+      $(".mousedown").add(".spacer").removeClass("mousedown");
+      return;
+    }
+    var position = self.css("position");
+    var offset = self.offset();
+    self.appendTo($(".customizeToolsArea"));
+    self.css({position: "absolute", top: offset.top, left: offset.left, "z-index": 999});
+
+    var sortable = $(".customizeToolsArea .panelToolbarIconsRow");
+    var spacer = sortable.children().last();
+    console.log(spacer.html());
+    self.animate({top: spacer.offset().top,
+                  left: spacer.offset().left + spacer.width() - self.width()},
+                 ANIMATION_TIME, function(){
+      self.insertAfter(spacer);
+      $(".mousedown").add(".spacer").removeClass("mousedown");
+      self.css({"position": position, top: "auto", left: "auto", "z-index": "auto"});
+      sortable.sortable("refresh");
+    });
   }
 
   $(function() {
@@ -113,36 +227,8 @@ define(function (require) {
       $(".panelToolbarIconsRow").sortable("enable");
     });
 
-    $('.arrowPanel')
-      .contextMenu({menu: 'panelContext'}, function(a, el, pos) {
-      switch (a) {
-      case "addMore":
-        enterCustomizeMode();
-        break;
-      default:
-        console.log(
-            "Action: " + a + "\n\n" +
-            "Element ID: " + $(el).attr("id") + "\n\n" +
-            "X: " + pos.x + "  Y: " + pos.y + " (relative to element)\n\n" +
-            "X: " + pos.docX + "  Y: " + pos.docY+ " (relative to document)"
-            );
-      }
-    });
-
-    $('.menuPanelButton').contextMenu({menu: "buttonContext"}, function(a, el, pos) {
-      switch (a) {
-      case "customize":
-        enterCustomizeMode();
-        break;
-      default:
-        console.log(
-            "Action: " + a + "\n\n" +
-            "Element ID: " + $(el).attr("id") + "\n\n" +
-            "X: " + pos.x + "  Y: " + pos.y + " (relative to element)\n\n" +
-            "X: " + pos.docX + "  Y: " + pos.docY+ " (relative to document)"
-            );
-      }
-    });
+    setNormalContextMenu($('.menuPanelButton'));
+    setNormalContextMenu($('.arrowPanel'));
 
     var clicks = 0;
     $(".window").on("click", ".menuPanelButton", function(event) {
@@ -155,37 +241,14 @@ define(function (require) {
           if (clicks == 1) {
             self.effect("shake", { times: options.times || 1, distance: options.distance || 2 }, options.duration || 100);
           } else {
-            var sortable;
-            var spacer;
             var inMenu = self.parents('.arrowPanel').length;
-            var position = self.css("position");
-            var offset = self.offset();
-            self.appendTo($(".customizeToolsArea .panelToolbarIconsRow"));
-            self.css({position: "absolute", top: offset.top, left: offset.left, "z-index": 999});
-
-            if (inMenu) {
-              sortable = $(".navBar .panelToolbarIconsRow");
+            if (inMenu)
               if (options.goToPanel)
-                sortable = $(".customizeToolsArea .panelToolbarIconsRow");
-              spacer = sortable.children().last();
-              console.log("spacer = " +  spacer.html());
-              self.animate({top: spacer.offset().top,
-                            left: spacer.offset().left + spacer.width() - self.width()},
-                           ANIMATION_TIME, function(){
-                self.insertAfter(spacer);
-                self.css({"position": position, top: "auto", left: "auto", "z-index": "auto"});
-                sortable.sortable("refresh");
-              });
-            } else {
-              sortable = $(".arrowPanel .panelToolbarIconsRow");
-              spacer = sortable.find(".spacer");
-              self.animate({top: spacer.offset().top, left: spacer.offset().left}, ANIMATION_TIME, function(){
-                self.insertBefore(spacer);
-                self.css({"position": position, top: "auto", left: "auto", "z-index": "auto"});
-                sortable.sortable("refresh");
-              });
-            }
-
+                moveToPanel(self);
+              else
+                moveToToolbar(self);
+            else
+              moveToMenu(self);
           }
           clicks = 0;
         }, 200);
