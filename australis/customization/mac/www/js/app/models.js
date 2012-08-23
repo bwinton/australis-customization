@@ -88,8 +88,8 @@ define(["jquery", "underscore", "backbone", "jquery-ui"], function($, _, Backbon
         '</div>' +
         '<div class="locationBar" contentEditable="true">' +
         '  <div class="locationBarLabel">' +
-        '    <span class="domainName">www.stephenhorlander.com</span>' +
-        '<span class="urlPath">/</span>' +
+        '    <span class="domainName"></span>' +
+        '<span class="urlPath">Go to a Website</span>' +
         '  </div>' +
         '  <div class="stopGoReload">' +
         '    <div class="icon"></div>' +
