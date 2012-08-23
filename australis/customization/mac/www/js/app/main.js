@@ -56,7 +56,7 @@ define(function (require) {
     $(".spacer").slideUp("fast");
     $(".panelToolbarIconsRow").sortable("disable");
     setNormalContextMenu($(".menuPanelButton"));
-    $(".arrowPanel").enableContextMenu();
+    setNormalContextMenu($(".arrowPanel"));
     var menuPanel = $("#menuPanel");
     menuPanel.css("z-index", 9999);
     menuPanel.appendTo($("div.window"));
@@ -101,15 +101,21 @@ define(function (require) {
   function setNormalContextMenu(el) {
     el.destroyContextMenu();
     el.contextMenu({menu: 'panelContext'}, function(a, el, pos) {
-      if (a === "customize")
+      switch (a) {
+      case "customize":
         enterCustomizeMode();
-      else
+        break;
+      case "list":
+        $("#menuPanel").toggleClass("listview");
+        break;
+      default:
         console.log(
-            "Action: " + a + "\n\n" +
-            "Element ID: " + $(el).attr("id") + "\n\n" +
-            "X: " + pos.x + "  Y: " + pos.y + " (relative to element)\n\n" +
-            "X: " + pos.docX + "  Y: " + pos.docY+ " (relative to document)"
-            );
+          "Action: " + a + "\n\n" +
+          "Element ID: " + $(el).attr("id") + "\n\n" +
+          "X: " + pos.x + "  Y: " + pos.y + " (relative to element)\n\n" +
+          "X: " + pos.docX + "  Y: " + pos.docY+ " (relative to document)"
+          );
+      }
     });
   }
 

@@ -189,15 +189,10 @@ define(["jquery", "underscore", "backbone", "jquery-ui"], function($, _, Backbon
     customizePanel.render();
     $(".panelToolbarIconsRow").sortable({
       disabled: true,
+      scroll: false,
+      containment: "document",
       connectWith: ".panelToolbarIconsRow",
       items: ".menuPanelButton",
-      stop: function(event, ui) {
-        //console.log("Got stop.");
-      },
-      change: function(event, ui) {
-        if (ui.placeholder.index() == 2)
-          console.log("Got change.  "+ui.placeholder.index());
-      }
     });
   }
 
