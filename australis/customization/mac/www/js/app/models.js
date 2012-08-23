@@ -151,7 +151,17 @@ define(["jquery", "underscore", "backbone", "jquery-ui"], function($, _, Backbon
     },
 
     renderFooter: function($el) {
-      $el.append("<div class='customizeFooter'></div>");
+      $el.append("<div>" +
+                 "  <div class='panelSectionEditContainer'>" +
+                 "    <div class='panelSectionEditContainerButton' title='Ctrl+V'>" +
+                 "      <div class='panelSectionEditContainerIcon'><img src='images/searchbox-icon.png' alt='searchbox-icon'/></div>" +
+                 "      <div style='-moz-box-flex: 1'></div>" +
+                 "      <div class='panelSectionEditContainerLabel' style='margin-right: 5px; color: rgb(150, 150, 150);'>Google</div>" +
+                 "    </div>" +
+                 "  </div>" +
+                 "  <div style='-moz-box-flex: 1'></div>" +
+                 "</div>" +
+                 "<div class='customizeFooter'></div>");
     }
   });
 

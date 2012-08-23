@@ -217,6 +217,10 @@
   margin: 10px 0px;
 }
 
+.customizeToolsArea .panelSectionEditContainer {
+  width: 231px;
+}
+
 .panelSectionEditContainerButton {
   display: -moz-box;
   -moz-box-orient: horizontal;
