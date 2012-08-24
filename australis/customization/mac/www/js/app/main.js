@@ -31,6 +31,13 @@ define(function (require) {
       $('div.toolbarButton.customizeButton').toggleClass('toggled');
       $('div.arrowPanelContainer#menuPanel').toggle();
     }
+
+    // Put the toolbar buttons in the Panel, then move them back after, as a hint.
+    var toolbarThings = $(".navBar .menuPanelButton");
+    toolbarThings.each(function(index, val) {
+      $(val).appendTo($(".customizeToolsArea .panelToolbarIconsRow"));
+    });
+
     toggleCustomizeTab();
     menuPanel.appendTo($("div.customizeMenuArea"));
     menuPanel.animate({top: "130px", right: "90px"}, ANIMATION_TIME, function(){
@@ -45,6 +52,12 @@ define(function (require) {
         $(".navBar .spacer").css("display", "-moz-box");
       });
     }, 100);
+    setTimeout(function() {
+      // And now that the spacer is in its right place, move the toolbar buttons back.
+      $.each(toolbarThings.toArray().reverse(), function(index, val) {
+        moveToToolbar($(val), 400);
+      });
+    }, 400);
   }
 
   function leaveCustomizeMode() {
@@ -119,7 +132,8 @@ define(function (require) {
     });
   }
 
-  function moveToMenu(self) {
+  function moveToMenu(self, speed) {
+    speed = speed || ANIMATION_TIME;
     if (self.parents(".arrowPanel").length) {
       $(".mousedown").add(".spacer").removeClass("mousedown");
       return;
@@ -133,7 +147,7 @@ define(function (require) {
     var spacer = sortable.find(".spacer");
     self.animate({top: spacer.offset().top,
                   left: spacer.offset().left},
-                 ANIMATION_TIME, function(){
+                 speed, function(){
       self.insertBefore(spacer);
       $(".mousedown").add(".spacer").removeClass("mousedown");
       self.css({"position": position, top: "auto", left: "auto", "z-index": "auto"});
@@ -141,7 +155,8 @@ define(function (require) {
     });
   }
 
-  function moveToToolbar(self) {
+  function moveToToolbar(self, speed) {
+    speed = speed || ANIMATION_TIME;
     if (self.parents(".navBar").length) {
       $(".mousedown").add(".spacer").removeClass("mousedown");
       return;
@@ -155,7 +170,7 @@ define(function (require) {
     var spacer = sortable.children().last();
     self.animate({top: spacer.offset().top,
                   left: spacer.offset().left + spacer.width() - self.width()},
-                 ANIMATION_TIME, function(){
+                 speed, function(){
       self.insertAfter(spacer);
       $(".mousedown").add(".spacer").removeClass("mousedown");
       self.css({"position": position, top: "auto", left: "auto", "z-index": "auto"});
@@ -175,7 +190,6 @@ define(function (require) {
 
     var sortable = $(".customizeToolsArea .panelToolbarIconsRow");
     var spacer = sortable.children().last();
-    console.log(spacer.html());
     self.animate({top: spacer.offset().top,
                   left: spacer.offset().left + spacer.width() - self.width()},
                  ANIMATION_TIME, function(){
