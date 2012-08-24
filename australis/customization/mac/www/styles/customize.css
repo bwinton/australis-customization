@@ -111,14 +111,14 @@ x-tabpanel > *:first-child {
 }
 
 .window.customizeMode .spacer {
-  -moz-transition: -moz-transform 0.5s ease-in-out 100ms,
+  -moz-transition: -moz-transform 30ms ease-in-out 0ms,
                    background-color 10ms linear 0ms,
-                   border-color 10ms linear 0ms,
-                   box-shadow 10ms linear 0ms;
+                   border-color 30ms linear 0ms,
+                   box-shadow 30ms linear 0ms;
 }
 
 .window.customizeMode .spacer.mousedown {
-  border-color: #8acbf9 #7bbdea #6db0de;
+  border: 1px solid hsla(204,73%,40%,1);
   box-shadow: 0 1px 0 hsla(0,0%,100%,.3) inset,
               0 0 0 1px hsla(0,0%,100%,.3) inset,
               0 0 5px hsla(204,73%,70%,.5);
