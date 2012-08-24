@@ -32,12 +32,6 @@ define(function (require) {
       $('div.arrowPanelContainer#menuPanel').toggle();
     }
 
-    // Put the toolbar buttons in the Panel, then move them back after, as a hint.
-    var toolbarThings = $(".navBar .menuPanelButton");
-    toolbarThings.each(function(index, val) {
-      $(val).appendTo($(".customizeToolsArea .panelToolbarIconsRow"));
-    });
-
     toggleCustomizeTab();
     menuPanel.appendTo($("div.customizeMenuArea"));
     menuPanel.animate({top: "130px", right: "90px"}, ANIMATION_TIME, function(){
@@ -52,12 +46,6 @@ define(function (require) {
         $(".navBar .spacer").css("display", "-moz-box");
       });
     }, 100);
-    setTimeout(function() {
-      // And now that the spacer is in its right place, move the toolbar buttons back.
-      $.each(toolbarThings.toArray().reverse(), function(index, val) {
-        moveToToolbar($(val), 400);
-      });
-    }, 400);
   }
 
   function leaveCustomizeMode() {
