@@ -204,6 +204,8 @@ define(function (require) {
     $(".navBar").on("click", ".menuButton", function() {
       if (!$("div.window").hasClass("customizeMode"))
         toggleMenuPanel();
+      else
+        leaveCustomizeMode();
     });
     $(".window").on("mousedown", ".menuPanelButton", function(event) {
       if ($(".window.customizeMode").length)
