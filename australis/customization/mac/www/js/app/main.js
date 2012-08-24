@@ -209,7 +209,7 @@ define(function (require) {
     });
     $(".window").on("mousedown", ".menuPanelButton", function(event) {
       if ($(".window.customizeMode").length)
-        $(this).add(".spacer").addClass("mousedown");
+        $(this).add(".spacer").not(".panelSectionEditContainer.spacer").addClass("mousedown");
     })
     .on("mouseup", ".menuPanelButton", function(event) {
       $(".mousedown").add(".spacer").removeClass("mousedown");

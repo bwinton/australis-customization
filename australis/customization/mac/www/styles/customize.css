@@ -62,11 +62,11 @@
   background-image: -moz-linear-gradient(hsla(0,0%,100%,.6), hsla(0,0%,100%,.1));
   background-clip: padding-box;
   box-shadow: none;
-  opacity: .5;
+  opacity: .4;
 }
 
 .window.customizeMode .panelFooter img {
-  opacity: .5;
+  opacity: .4;
 }
 
 .window.customizeMode .panelFooter .normalButton {
